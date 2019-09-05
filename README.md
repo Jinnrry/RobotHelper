@@ -9,15 +9,15 @@
 ## Demo
 
 ```
-        Point point = Image.findPointByMulColor(ScreenCaptureUtil.getScreenCap(), "434FD7,65|0|414DDB,90|55|46CDFF,5|86|5FA119");
-        Robot.tap(point);
+Point point = Image.findPointByMulColor(ScreenCaptureUtil.getScreenCap(), "434FD7,65|0|414DDB,90|55|46CDFF,5|86|5FA119");
+Robot.tap(point);
 ```
 
 以上代码将会在屏幕中查找![chrome](./docs/chrome.png)图标，然后点击这个图标（你直接运行这段代码可能不会成功，因为你的手机屏幕尺寸跟我不一样）
 
 
 ```
-        String s = OcrApi.multLineOcr(ScreenCaptureUtil.getScreenCap(), 0, 0, 200, 30);
-        MLog.info(s);
+String s = OcrApi.multLineOcr(ScreenCaptureUtil.getScreenCap(), 0, 0, 200, 30);
+MLog.info(s);
 ```
 以上代码将输出(0,0)到(200,30)这个矩形区域内的文字。

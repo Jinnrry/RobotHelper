@@ -1,3 +1,7 @@
+![issues](https://img.shields.io/github/issues/Jinnrry/RobotHelper)
+![forks](https://img.shields.io/github/forks/Jinnrry/RobotHelper)
+![stars](https://img.shields.io/github/stars/Jinnrry/RobotHelper)
+![lincense](https://img.shields.io/github/license/Jinnrry/RobotHelper)
 # RobotHelper
 
 ## 这是做什么的？

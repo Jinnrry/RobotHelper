@@ -7,4 +7,6 @@ python manage.py runserver 0.0.0.0:8000
 ```
 
 
-线上部署请参考django的线上环境部署
+线上部署请参考django的[线上环境部署](https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/uwsgi/)
+
+文字识别能力基于[cnocr](https://github.com/breezedeus/cnocr)这里仅仅是这个项目的django包装

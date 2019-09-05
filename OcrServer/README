@@ -1,0 +1,10 @@
+运行方法：
+
+本地测试环境运行
+
+```shell script
+python manage.py runserver 0.0.0.0:8000
+```
+
+
+线上部署请参考django的线上环境部署

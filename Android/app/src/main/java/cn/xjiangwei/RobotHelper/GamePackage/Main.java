@@ -1,7 +1,9 @@
 package cn.xjiangwei.RobotHelper.GamePackage;
 
+import cn.xjiangwei.RobotHelper.Tools.Image;
 import cn.xjiangwei.RobotHelper.Tools.MLog;
 import cn.xjiangwei.RobotHelper.Tools.OcrApi;
+import cn.xjiangwei.RobotHelper.Tools.Point;
 import cn.xjiangwei.RobotHelper.Tools.Robot;
 import cn.xjiangwei.RobotHelper.Tools.ScreenCaptureUtil;
 import cn.xjiangwei.RobotHelper.Tools.Toast;
@@ -18,11 +20,7 @@ public class Main {
         sleep(5000);
 
         // 点击状态栏
-//        Robot.tap(0,0);
-
-        String s = OcrApi.multLineOcr(ScreenCaptureUtil.getScreenCap(), 0, 0, 768, 768);
-
-        MLog.error(s);
+        Robot.tap(0,0);
 
         Toast.show("运行结束！");
         Toast.notice();

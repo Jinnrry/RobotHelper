@@ -25,3 +25,8 @@ String s = OcrApi.multLineOcr(ScreenCaptureUtil.getScreenCap(), 0, 0, 200, 30);
 MLog.info(s);
 ```
 以上代码将输出(0,0)到(200,30)这个矩形区域内的文字。
+
+## TODO List
+
+- [ ] 1.引入tesseract-ocr4.1，不再依赖服务端实现文字识别
+- [ ] 2.Hook系统相关api，修改系统相关常量，使游戏可以在模拟器中运行，并且让游戏无法识别模拟器

@@ -159,34 +159,42 @@ public class Image {
      */
     public static Point findPointByMulColor(Bitmap img, String colorRules, int offset) {
         long now = System.currentTimeMillis();
+        // 将图标转换成颜色数组
         int[] colors = new int[img.getWidth() * img.getHeight()];
         String[] res = colorRules.split(",");
         Color firstPointColor = HexColor2DecColor(res[0], true);
         img.getPixels(colors, 0, img.getWidth(), 0, 0, img.getWidth(), img.getHeight());
+        //遍历颜色数组
         for (int i = 0; i < colors.length; i++) {
+            // 寻找规则中第一个点
             if (Color.isSame(new Color(colors[i]), firstPointColor, offset)) {
+                // 第一个点的y坐标
                 int y = (int) (i / img.getWidth());
+                // 第一个点的x坐标
                 int x = i % img.getWidth();
+                // 检查规则中后续每个点
                 for (int k = 1; k < res.length; k++) {
+                    //处理规则中多余的引号
                     res[k] = res[k].replace("\"", "");
                     String[] info = res[k].split("\\|");
                     int testX = x + Integer.parseInt(info[0]);
                     int testY = y + Integer.parseInt(info[1]);
+                    //超出图片范围
                     if (testX < 0 || testY < 0 || testX > img.getWidth() || testY > img.getHeight()) {
                         break;
                     }
                     Color nextColor = getPoint(img, testX, testY);
-                    if (!Color.isSame(nextColor, HexColor2DecColor(info[2], true),offset)) {
+                    if (!Color.isSame(nextColor, HexColor2DecColor(info[2], true), offset)) {
                         break;
                     } else {
                         if (k == (res.length - 1)) {
-                            MLog.info("找点用时：", String.valueOf(System.currentTimeMillis() - now));
                             return new Point(x, y);
                         }
                     }
                 }
             }
         }
+        MLog.info("找点用时：", String.valueOf(System.currentTimeMillis() - now));
         return new Point(-1, -1);
     }
 

@@ -13,6 +13,10 @@ import static android.content.Context.VIBRATOR_SERVICE;
 
 public class Toast {
 
+    /**
+     * Toast提示
+     * @param msg
+     */
     public static void show(final String msg) {
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
@@ -22,7 +26,9 @@ public class Toast {
         });
     }
 
-
+    /**
+     * 声音提示
+     */
     public static void notice() {
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Ringtone r = RingtoneManager.getRingtone(MainApplication.getInstance(), notification);

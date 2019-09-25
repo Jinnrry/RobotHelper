@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':tesseract4android-2.0.0', ':opencv-android341'
+include ':java'

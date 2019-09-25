@@ -13,6 +13,11 @@ import java.util.regex.Pattern;
 
 import cn.xjiangwei.RobotHelper.MainApplication;
 
+
+/**
+ * 建议使用TessactOcr替代
+ */
+@Deprecated
 public class OcrApi {
 
     private static String ocrApiUrl = MainApplication.getServerUrl() + "singleLineOcr";

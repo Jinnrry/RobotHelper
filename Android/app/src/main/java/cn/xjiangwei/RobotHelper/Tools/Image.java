@@ -9,6 +9,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import org.opencv.android.Utils;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,6 +50,7 @@ public class Image {
 
     /**
      * 打开本地图片
+     *
      * @param path
      * @return
      */
@@ -104,6 +111,7 @@ public class Image {
 
     /**
      * 多色找点函数
+     *
      * @param img
      * @param colorRules
      * @return
@@ -183,12 +191,12 @@ public class Image {
     }
 
     /**
-     *
      * 已废弃
-     * @deprecated
+     *
      * @param img
      * @param colorRules
      * @return
+     * @deprecated
      */
     public static Point findPointByMulColorBack(Bitmap img, String colorRules) {
         long now = System.currentTimeMillis();
@@ -227,6 +235,7 @@ public class Image {
 
     /**
      * 多色找点，返回屏幕内全部满足规则的点
+     *
      * @param img
      * @param colorRules
      * @return
@@ -266,7 +275,6 @@ public class Image {
 
 
     /**
-     *
      * @param color
      * @return
      */
@@ -285,7 +293,6 @@ public class Image {
     }
 
     /**
-     *
      * @param color
      * @param bgr
      * @return
@@ -376,6 +383,45 @@ public class Image {
 
         return Base64.encodeToString(bytes, Base64.DEFAULT);
 
+
+    }
+
+
+    /**
+     * 模板匹配
+     *
+     * @param srcImg      //源图像
+     * @param templateImg //模板图像
+     * @param threshold   //相识度阈值,阈值调小可以一定程度解决不同手机分辨率的问题
+     * @return //如果没有找到则返回(-1,-1)点
+     */
+    public static Point matchTemplate(Bitmap srcImg, Bitmap templateImg, double threshold) {
+
+        if (threshold <= 0) {
+            threshold = 0.5;
+        }
+
+
+        Mat tpl = new Mat();
+        Mat src = new Mat();
+        Utils.bitmapToMat(srcImg, src);
+        Utils.bitmapToMat(templateImg, tpl);
+
+
+        int height = src.rows() - tpl.rows() + 1;
+        int width = src.cols() - tpl.cols() + 1;
+        Mat result = new Mat(height, width, CvType.CV_32FC1);
+        int method = Imgproc.TM_CCOEFF_NORMED;
+        Imgproc.matchTemplate(src, tpl, result, method);
+        Core.MinMaxLocResult minMaxResult = Core.minMaxLoc(result);
+        org.opencv.core.Point maxloc = minMaxResult.maxLoc;
+        if (minMaxResult.maxVal < threshold) {
+            return new Point(-1, -1);
+        }
+        org.opencv.core.Point minloc = minMaxResult.minLoc;
+        org.opencv.core.Point matchloc = null;
+        matchloc = maxloc;
+        return new Point((int) matchloc.x, (int) matchloc.y);
 
     }
 

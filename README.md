@@ -10,7 +10,18 @@
 [wiki](https://github.com/Jinnrry/RobotHelper/wiki)
 
 
+## V1.0版本简介
+
+1.新增了图片模板匹配（相当于按键精灵找图功能的升级版），自动处理图像分辨率问题，一次抓图，多分辨率终端可用
+
+2.内置了Tessact-Ocr，不再依赖服务端做文字识别，支持设置黑白名单
+
+3.内置opencv，各种图像处理，轨迹追踪，再也不是难题
+
+
 ## Demo
+
+> 更多使用参见`cn.xjiangwei.RobotHelper.GamePackage.Main`类代码和Wiki说明
 
 ```
 Point point = Image.findPointByMulColor(ScreenCaptureUtil.getScreenCap(), "434FD7,65|0|414DDB,90|55|46CDFF,5|86|5FA119");
@@ -25,3 +36,10 @@ String s = OcrApi.multLineOcr(ScreenCaptureUtil.getScreenCap(), 0, 0, 200, 30);
 MLog.info(s);
 ```
 以上代码将输出(0,0)到(200,30)这个矩形区域内的文字。
+
+
+
+## 未来规划
+
+- [ ] 1.Hook系统相关api，修改系统相关常量，使游戏可以在模拟器中运行，并且让游戏无法识别模拟器
+- [ ] 2.没了，如有建议可以提issues或者pr

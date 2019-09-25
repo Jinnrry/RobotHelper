@@ -22,7 +22,6 @@ import java.lang.reflect.Method;
 import cn.xjiangwei.RobotHelper.GamePackage.Main;
 import cn.xjiangwei.RobotHelper.R;
 import cn.xjiangwei.RobotHelper.Tools.MLog;
-import cn.xjiangwei.RobotHelper.Tools.OcrApi;
 import cn.xjiangwei.RobotHelper.Tools.ScreenCaptureUtil;
 
 import static android.os.SystemClock.sleep;

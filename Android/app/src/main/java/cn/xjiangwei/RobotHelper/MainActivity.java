@@ -3,6 +3,8 @@ package cn.xjiangwei.RobotHelper;
 import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
@@ -14,12 +16,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
+
 import com.github.dfqin.grantor.PermissionListener;
 import com.github.dfqin.grantor.PermissionsUtil;
+import com.googlecode.tesseract.android.TessBaseAPI;
+import com.lahm.library.EasyProtectorLib;
+import com.lahm.library.EmulatorCheckCallback;
+
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
 import cn.xjiangwei.RobotHelper.Service.RunTime;
+import cn.xjiangwei.RobotHelper.Tools.MLog;
 import cn.xjiangwei.RobotHelper.Tools.Robot;
+import cn.xjiangwei.RobotHelper.Tools.ScreenCaptureUtil;
 import cn.xjiangwei.RobotHelper.Tools.ScreenCaptureUtilByMediaPro;
+import cn.xjiangwei.RobotHelper.Tools.TessactOcr;
+import cn.xjiangwei.RobotHelper.Tools.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -62,6 +85,22 @@ public class MainActivity extends AppCompatActivity {
             }
         }, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
 
+
+        // 初始化tessactocr
+        if (!TessactOcr.checkInit()) {
+            TessactOcr.Init();
+        }
+
+        // 初始化opencv
+        if (!OpenCVLoader.initDebug()) {
+            MLog.info("OpenCV", "Internal OpenCV library not found. Using OpenCV Manager for initialization");
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
+        } else {
+            MLog.info("OpenCV", "OpenCV library found inside package. Using it!");
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        }
+
+
     }
 
     @Override
@@ -74,28 +113,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     public void start(View view) {
-
-        EditText editText = findViewById(R.id.serverUrl);
-        String serverUrl = editText.getText().toString();
-        MainApplication.setServerUrl(serverUrl);
-
-        ScreenCaptureUtilByMediaPro.init();
-        Intent intent = new Intent(this, RunTime.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent);
+        if (!checkXposedHook()) {
+            if (!TessactOcr.checkInit()) {
+                Toast.show("初始化中，Please Wait!");
+                return;
+            }
+            EditText editText = findViewById(R.id.serverUrl);
+            String serverUrl = editText.getText().toString();
+            MainApplication.setServerUrl(serverUrl);
+            // 启动屏幕监控
+            ScreenCaptureUtilByMediaPro.init();
+            Intent intent = new Intent(this, RunTime.class);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent);
+            } else {
+                startService(intent);
+            }
+            finish();
         } else {
-            startService(intent);
+            Toast.show("xp 框架加载失败！");
         }
-
-        finish();
     }
 
 
     public void test(View view) {
-        Robot.tap(0, 0);
 
+    }
+
+
+    private boolean checkXposedHook() {
+        return false;
     }
 
 
@@ -116,4 +164,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case LoaderCallbackInterface.SUCCESS: {
+                    MLog.info("OpenCV", "OpenCV loaded successfully");
+                }
+                break;
+                default: {
+                    super.onManagerConnected(status);
+                }
+                break;
+            }
+        }
+    };
 }

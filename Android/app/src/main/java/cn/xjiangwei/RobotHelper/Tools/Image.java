@@ -159,7 +159,7 @@ public class Image {
      */
     public static Point findPointByMulColor(Bitmap img, String colorRules, int offset) {
         long now = System.currentTimeMillis();
-        // 将图标转换成颜色数组
+        // 将图像转换成颜色数组
         int[] colors = new int[img.getWidth() * img.getHeight()];
         String[] res = colorRules.split(",");
         Color firstPointColor = HexColor2DecColor(res[0], true);

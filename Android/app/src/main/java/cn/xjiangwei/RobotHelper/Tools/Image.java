@@ -176,7 +176,7 @@ public class Image {
                         break;
                     }
                     Color nextColor = getPoint(img, testX, testY);
-                    if (!Color.isSame(nextColor, HexColor2DecColor(info[2], true))) {
+                    if (!Color.isSame(nextColor, HexColor2DecColor(info[2], true),offset)) {
                         break;
                     } else {
                         if (k == (res.length - 1)) {

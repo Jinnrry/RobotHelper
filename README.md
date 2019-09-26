@@ -21,7 +21,7 @@
 
 ## Demo
 
-> 更多使用参见`cn.xjiangwei.RobotHelper.GamePackage.Main`类代码和Wiki说明
+> 更多使用参见  [`cn.xjiangwei.RobotHelper.GamePackage.Main`](https://github.com/Jinnrry/RobotHelper/blob/master/Android/app/src/main/java/cn/xjiangwei/RobotHelper/GamePackage/Main.java)类代码和Wiki说明
 
 ```
 Point point = Image.findPointByMulColor(ScreenCaptureUtil.getScreenCap(), "434FD7,65|0|414DDB,90|55|46CDFF,5|86|5FA119");

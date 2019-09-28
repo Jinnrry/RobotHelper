@@ -2,6 +2,7 @@
 ![forks](https://img.shields.io/github/forks/Jinnrry/RobotHelper)
 ![stars](https://img.shields.io/github/stars/Jinnrry/RobotHelper)
 ![lincense](https://img.shields.io/github/license/Jinnrry/RobotHelper)
+![Codacy grade](https://img.shields.io/codacy/grade/3dce672ecf2c4dbb909e005f8f22cfda)
 # RobotHelper
 
 ## 这是做什么的？

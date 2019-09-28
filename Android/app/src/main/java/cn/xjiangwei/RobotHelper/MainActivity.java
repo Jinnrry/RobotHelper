@@ -78,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
         PermissionsUtil.requestPermission(this, new PermissionListener() {
             @Override
             public void permissionGranted(@NonNull String[] permission) {
+                //  获得sdcard写入权限后 初始化tessactocr
+                if (!TessactOcr.checkInit()) {
+                    TessactOcr.Init();
+                }
             }
 
             @Override
@@ -86,10 +90,7 @@ public class MainActivity extends AppCompatActivity {
         }, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
 
 
-        // 初始化tessactocr
-        if (!TessactOcr.checkInit()) {
-            TessactOcr.Init();
-        }
+
 
         // 初始化opencv
         if (!OpenCVLoader.initDebug()) {

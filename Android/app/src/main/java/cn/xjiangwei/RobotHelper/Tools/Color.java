@@ -69,22 +69,26 @@ public class Color {
 
     /**
      * 判断2个颜色是否相同，由于图像渲染叠加，同一个icon可能每次渲染的色值不完全相同，所以判断的时候加入了误差
+     *
      * @param color1
      * @param color2
      * @return
      */
     public static boolean isSame(Color color1, Color color2) {
-        return Math.abs(color1.getR() - color2.getR()) <= 30 && Math.abs(color1.getG() - color2.getG()) <= 30 && Math.abs(color1.getB() - color2.getB()) <= 30;
+        return isSame(color1, color2, 30);
     }
 
     /**
      * 判断颜色是否相同，自定义误差
+     *
      * @param color1
      * @param color2
      * @param offset
      * @return
      */
     public static boolean isSame(Color color1, Color color2, int offset) {
+
+        // 算法： R G B这3个通道的色值差的绝对值之和小于offset
         return (Math.abs(color1.getR() - color2.getR()) + Math.abs(color1.getG() - color2.getG()) + Math.abs(color1.getB() - color2.getB())) <= offset;
     }
 

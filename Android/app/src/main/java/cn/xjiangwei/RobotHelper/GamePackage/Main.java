@@ -41,6 +41,7 @@ public class Main {
             e.printStackTrace();
         }
         Bitmap bitmap = BitmapFactory.decodeStream(is);
+        //在当前屏幕中查找模板图片
         Point point = Image.matchTemplate(ScreenCaptureUtil.getScreenCap(), bitmap, 0.1);
         MLog.info("找到模板", point.toString());
         // 点击找到的这个图
@@ -49,6 +50,7 @@ public class Main {
 
         /**************************** 文字识别demo  **********************************/
         try {
+            //识别素材文件中的ocrTest.png图片中的文字
             is = MainApplication.getInstance().getAssets().open("ocrTest.png");
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,9 +60,8 @@ public class Main {
         MLog.info("文字识别结果：" + res);
 
 
-
         /*****************************  特征点找图  ************************************/
-        //查找chrome图标（特征点是3120X1440分辨率手机制作）
+        //当前屏幕中查找chrome图标（特征点是3120X1440分辨率手机制作）
         point = Image.findPointByMulColor(ScreenCaptureUtil.getScreenCap(), "434FD7,65|0|414DDB,90|55|46CDFF,5|86|5FA119");
         //点击chrome图标
         Robot.tap(point);

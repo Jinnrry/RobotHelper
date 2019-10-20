@@ -25,6 +25,9 @@ public class Hook4Input {
 
     /**
      * 处理android10的hook
+     * android源码文档
+     * <p>
+     * https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/services/core/java/com/android/server/input/InputManagerService.java
      *
      * @param lpparam
      */
@@ -48,6 +51,10 @@ public class Hook4Input {
 
     /**
      * 处理android9及其以下版本的的hook
+     * <p>
+     * android 源码位置
+     * <p>
+     * http://androidxref.com/9.0.0_r3/xref/frameworks/base/services/core/java/com/android/server/input/InputManagerService.java
      *
      * @param lpparam
      */

@@ -90,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
         }, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
 
 
-
-
         // 初始化opencv
         if (!OpenCVLoader.initDebug()) {
             MLog.info("OpenCV", "Internal OpenCV library not found. Using OpenCV Manager for initialization");
@@ -115,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void start(View view) {
-        if (!checkXposedHook()) {
+        if (checkXposedHook()) {
             if (!TessactOcr.checkInit()) {
                 Toast.show("初始化中，Please Wait!");
                 return;
@@ -139,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void test(View view) {
-
+       
     }
 
 

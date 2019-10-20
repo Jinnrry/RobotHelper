@@ -99,7 +99,7 @@ public class RunTime extends Service {
 
 
     /**
-     *  广播监听按钮点击事件
+     * 广播监听按钮点击事件
      */
     public class ButtonBroadcastReceiver extends BroadcastReceiver {
 
@@ -155,7 +155,6 @@ public class RunTime extends Service {
                                 Toast.makeText(getApplicationContext(), "还未实现暂停功能。", Toast.LENGTH_LONG).show();
                             }
                         });
-
 
 
                         break;

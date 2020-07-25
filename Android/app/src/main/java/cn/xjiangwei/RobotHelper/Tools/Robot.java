@@ -4,6 +4,9 @@ import android.app.Instrumentation;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 
+import static android.os.SystemClock.sleep;
+import static android.view.InputDevice.SOURCE_CLASS_POINTER;
+
 
 public class Robot {
     private static Instrumentation mInst = null;
@@ -71,5 +74,19 @@ public class Robot {
         tap(p.getX(), p.getY(), delay);
     }
 
+
+    public static void swiper(final int start_x, final int start_y, final int end_x, final int end_y) {
+        if (Robot.mInst == null) {
+            mInst = new Instrumentation();
+        }
+        //key down
+        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, start_x, start_y, 0));
+        //move
+        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE, start_x, start_y, 0));
+        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE, end_x, end_y, 0));
+        //key up
+        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, end_x, end_y, 0));
+
+    }
 
 }

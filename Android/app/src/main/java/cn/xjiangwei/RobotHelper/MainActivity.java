@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.github.dfqin.grantor.PermissionListener;
 import com.github.dfqin.grantor.PermissionsUtil;
@@ -36,6 +37,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import cn.xjiangwei.RobotHelper.Accessibility.HttpServer;
+import cn.xjiangwei.RobotHelper.Service.Accessibility;
 import cn.xjiangwei.RobotHelper.Service.RunTime;
 import cn.xjiangwei.RobotHelper.Tools.MLog;
 import cn.xjiangwei.RobotHelper.Tools.Robot;
@@ -51,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private MainApplication mainApplication;
     private int mResultCode;
     private Intent mResultData;
-
     private MediaProjection mMediaProjection;
 
 
@@ -113,33 +115,29 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void start(View view) {
-        if (checkXposedHook()) {
-            if (!TessactOcr.checkInit()) {
-                Toast.show("初始化中，Please Wait!");
-                return;
-            }
-            EditText editText = findViewById(R.id.serverUrl);
-            String serverUrl = editText.getText().toString();
-            MainApplication.setServerUrl(serverUrl);
-            // 启动屏幕监控
-            ScreenCaptureUtilByMediaPro.init();
-            Intent intent = new Intent(this, RunTime.class);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(intent);
-            } else {
-                startService(intent);
-            }
-            finish();
-        } else {
-            Toast.show("xp 框架加载失败！");
+        if (!TessactOcr.checkInit()) {
+            Toast.show("初始化中，Please Wait!");
+            return;
         }
+        // 启动屏幕监控
+        ScreenCaptureUtilByMediaPro.init();
+        Intent intent = new Intent(this, RunTime.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent);
+        } else {
+            startService(intent);
+        }
+        finish();
+
     }
 
 
-    public void test(View view) {
-       
-    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateStatus();
+    }
 
     private boolean checkXposedHook() {
         return false;
@@ -178,4 +176,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+
+    private void updateStatus() {
+        TextView xpStatus = (TextView) findViewById(R.id.xposed_status);
+        TextView asStatus = (TextView) findViewById(R.id.accessibility_status);
+        TextView hsStatus = (TextView) findViewById(R.id.httpserver_status);
+
+        xpStatus.setText(checkXposedHook() ? "Xposed状态：已加载" : "Xposed状态：未加载");
+        asStatus.setText(Accessibility.DOM == null ? "Accessibility状态：未加载" : "Accessibility状态：已加载");
+        hsStatus.setText((RunTime.httpServer != null && RunTime.httpServer.runing) ? "HttpServer状态：已开启" : "HttpServer状态：未开启");
+    }
+
 }

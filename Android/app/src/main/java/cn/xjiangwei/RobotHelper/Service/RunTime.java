@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.lang.reflect.Method;
 
+import cn.xjiangwei.RobotHelper.Accessibility.HttpServer;
 import cn.xjiangwei.RobotHelper.GamePackage.Main;
 import cn.xjiangwei.RobotHelper.R;
 import cn.xjiangwei.RobotHelper.Tools.MLog;
@@ -31,8 +32,12 @@ public class RunTime extends Service {
     public final static String INTENT_BUTTONID_TAG = "ButtonId";
     public final static int START = 1;
     public final static int END = 2;
+    public final static int START_HTTPSERVER = 3;
+    public final static int END_HTTPSERVER = 4;
     private static final String CHANNEL_ID = "cn.xjiangwei.RobotHelper.channel";
     public final static String ACTION_BUTTON = "com.notification.intent.action.ButtonClick";
+
+    public static HttpServer httpServer;
 
     public RunTime() {
     }
@@ -93,6 +98,19 @@ public class RunTime extends Service {
         remoteViews.setOnClickPendingIntent(R.id.btn2, end);
 
 
+        //设置点击的事件
+        Intent startHttpserverIntent = new Intent(ACTION_BUTTON);
+        startHttpserverIntent.putExtra(INTENT_BUTTONID_TAG, START_HTTPSERVER);
+        PendingIntent startHttpserver = PendingIntent.getBroadcast(this, START_HTTPSERVER, startHttpserverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        remoteViews.setOnClickPendingIntent(R.id.start_http, startHttpserver);
+
+
+        Intent endHttpServerIntent = new Intent(ACTION_BUTTON);
+        endHttpServerIntent.putExtra(INTENT_BUTTONID_TAG, END_HTTPSERVER);
+        PendingIntent endHttpServer = PendingIntent.getBroadcast(this, END_HTTPSERVER, endHttpServerIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        remoteViews.setOnClickPendingIntent(R.id.end_http, endHttpServer);
+
+
         startForeground(101, notification);
 
     }
@@ -126,6 +144,7 @@ public class RunTime extends Service {
             if (action.equals(ACTION_BUTTON)) {
                 //通过传递过来的ID判断按钮点击属性或者通过getResultCode()获得相应点击事件
                 int buttonId = intent.getIntExtra(INTENT_BUTTONID_TAG, 0);
+                System.out.println(buttonId);
                 switch (buttonId) {
                     case START:
                         collapseStatusBar(context);
@@ -156,6 +175,20 @@ public class RunTime extends Service {
                             }
                         });
 
+
+                        break;
+                    case START_HTTPSERVER:
+                        if (httpServer == null) {
+                            httpServer = new HttpServer();
+                        } else {
+                            httpServer.start();
+                        }
+                        cn.xjiangwei.RobotHelper.Tools.Toast.show("HttpServer Start!");
+
+                        break;
+                    case END_HTTPSERVER:
+                        httpServer.stop();
+                        cn.xjiangwei.RobotHelper.Tools.Toast.show("HttpServer Stop!");
 
                         break;
                     default:

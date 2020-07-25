@@ -2,22 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#5caaf9"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-
-    <Button
-        android:id="@+id/btn1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="开始" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始脚本" />
 
 
-    <Button
-        android:id="@+id/btn2"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="停止脚本" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="停止" />
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/start_http"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开启HttpServer" />
+
+        <Button
+            android:id="@+id/end_http"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关闭HttpServer" />
+
+    </LinearLayout>
 
 </LinearLayout>
+

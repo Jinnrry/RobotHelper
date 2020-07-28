@@ -110,4 +110,17 @@ public class Robot {
     }
 
 
+    /**
+     * TODO 待实现
+     * @param str
+     */
+    public static void input(String str) {
+//        if (Robot.mInst == null) {
+//            mInst = new Instrumentation();
+//        }
+
+
+    }
+
+
 }

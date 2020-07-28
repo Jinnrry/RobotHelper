@@ -1,5 +1,8 @@
 package cn.xjiangwei.RobotHelper.Accessibility;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.view.accessibility.AccessibilityNodeInfo;
 
 import org.json.JSONArray;
@@ -14,6 +17,8 @@ import cn.xjiangwei.RobotHelper.MainApplication;
 import cn.xjiangwei.RobotHelper.Service.Accessibility;
 import cn.xjiangwei.RobotHelper.Tools.Robot;
 import fi.iki.elonen.NanoHTTPD;
+
+import static android.support.v4.content.ContextCompat.getSystemService;
 
 public class HttpServer extends NanoHTTPD {
 
@@ -72,13 +77,28 @@ public class HttpServer extends NanoHTTPD {
                     ret = "{\"code\":500,\"msg\":\"检查是否开启xposed\"}";
                 }
                 break;
-            case "tap":
+            case "/tap":
                 try {
-                    Robot.tap(Integer.parseInt(parms.get("x")), Integer.parseInt(parms.get("y")));
+                    Robot.tap(Integer.parseInt(parms.get("x")), Integer.parseInt(parms.get("y")), Long.parseLong(parms.get("delay")));
                     ret = "{\"code\":200,\"msg\":\"success\"}";
                 } catch (Exception e) {
                     ret = "{\"code\":500,\"msg\":\"检查是否开启xposed\"}";
                 }
+                break;
+            case "/input":
+                try {
+                    Robot.input(parms.get("input"));
+                    ret = "{\"code\":200,\"msg\":\"success\"}";
+                } catch (Exception e) {
+                    System.out.println(e.toString());
+                    ret = "{\"code\":500,\"msg\":\"检查是否开启xposed\"}";
+                }
+                break;
+            case "/clipboard":
+                ClipboardManager cm = (ClipboardManager) MainApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData mClipData = ClipData.newPlainText("RobotHelp", parms.get("str"));
+                cm.setPrimaryClip(mClipData);
+                ret = "{\"code\":200,\"msg\":\"success\"}";
                 break;
         }
 

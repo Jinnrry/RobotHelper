@@ -65,7 +65,7 @@ public class HttpServer extends NanoHTTPD {
                 ret = "{\"w\": " + MainApplication.sceenWidth + " , \"h\":" + MainApplication.sceenHeight + "  }";
                 break;
             case "/swipe":
-                Robot.swiper(700, 2000, 800, 1900);
+                Robot.swipe(Float.parseFloat(parms.get("start_x")), Float.parseFloat(parms.get("start_y")), Float.parseFloat(parms.get("end_x")), Float.parseFloat(parms.get("end_y")), Float.parseFloat(parms.get("duration")));
                 break;
         }
 

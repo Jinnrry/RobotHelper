@@ -4,9 +4,6 @@ import android.app.Instrumentation;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 
-import static android.os.SystemClock.sleep;
-import static android.view.InputDevice.SOURCE_CLASS_POINTER;
-
 
 public class Robot {
     private static Instrumentation mInst = null;
@@ -74,19 +71,43 @@ public class Robot {
         tap(p.getX(), p.getY(), delay);
     }
 
+    public static void swipe(float x1, float y1, float x2, float y2, float duration) {
+        final int interval = 25;
+        int steps = (int) (duration * 1000 / interval + 1);
+        float dx = (x2 - x1) / steps;
+        float dy = (y2 - y1) / steps;
+        down(x1, y1);
+        for (int step = 0; step < steps; step++) {
+            SystemClock.sleep(interval);
+            moveTo(x1 + step * dx, y1 + step * dy, 0);
+        }
+        SystemClock.sleep(interval);
+        up(x2, y2);
+    }
 
-    public static void swiper(final int start_x, final int start_y, final int end_x, final int end_y) {
+
+    private static void down(float x, float y) {
         if (Robot.mInst == null) {
             mInst = new Instrumentation();
         }
-        //key down
-        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, start_x, start_y, 0));
-        //move
-        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE, start_x, start_y, 0));
-        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE, end_x, end_y, 0));
-        //key up
-        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, end_x, end_y, 0));
-
+        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, x, y, 0));
     }
+
+
+    private static void up(float x, float y) {
+        if (Robot.mInst == null) {
+            mInst = new Instrumentation();
+        }
+        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, x, y, 0));
+    }
+
+
+    private static void moveTo(float x, float y, int contactId) {
+        if (Robot.mInst == null) {
+            mInst = new Instrumentation();
+        }
+        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE, x, y, 0));
+    }
+
 
 }

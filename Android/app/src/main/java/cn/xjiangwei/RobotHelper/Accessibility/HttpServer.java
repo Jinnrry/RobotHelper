@@ -65,7 +65,20 @@ public class HttpServer extends NanoHTTPD {
                 ret = "{\"w\": " + MainApplication.sceenWidth + " , \"h\":" + MainApplication.sceenHeight + "  }";
                 break;
             case "/swipe":
-                Robot.swipe(Float.parseFloat(parms.get("start_x")), Float.parseFloat(parms.get("start_y")), Float.parseFloat(parms.get("end_x")), Float.parseFloat(parms.get("end_y")), Float.parseFloat(parms.get("duration")));
+                try {
+                    Robot.swipe(Float.parseFloat(parms.get("start_x")), Float.parseFloat(parms.get("start_y")), Float.parseFloat(parms.get("end_x")), Float.parseFloat(parms.get("end_y")), Float.parseFloat(parms.get("duration")));
+                    ret = "{\"code\":200,\"msg\":\"success\"}";
+                } catch (Exception e) {
+                    ret = "{\"code\":500,\"msg\":\"检查是否开启xposed\"}";
+                }
+                break;
+            case "tap":
+                try {
+                    Robot.tap(Integer.parseInt(parms.get("x")), Integer.parseInt(parms.get("y")));
+                    ret = "{\"code\":200,\"msg\":\"success\"}";
+                } catch (Exception e) {
+                    ret = "{\"code\":500,\"msg\":\"检查是否开启xposed\"}";
+                }
                 break;
         }
 

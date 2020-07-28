@@ -4,15 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/serverUrl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Ocr服务器地址"
-        android:text="http://172.18.97.192:8000/" />
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,11 +16,6 @@
             android:onClick="start"
             android:text="开始" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="test"
-            android:text="测试" />
 
         <Button
             android:layout_width="wrap_content"
@@ -38,5 +24,22 @@
             android:text="打开日志" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/xposed_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Xposed状态：未加载" />
+
+    <TextView
+        android:id="@+id/accessibility_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accessibility状态：未加载" />
+
+    <TextView
+        android:id="@+id/httpserver_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HttpServer状态：未开启" />
 
 </LinearLayout>

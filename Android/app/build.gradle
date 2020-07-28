@@ -35,5 +35,6 @@ dependencies {
     implementation 'com.lahm.library:easy-protector-release:1.1.0'
     implementation project(path: ':tesseract4android-2.0.0')
     implementation project(path: ':opencv-android341')
+    implementation 'com.nanohttpd:nanohttpd-webserver:2.2.0'
 }
 

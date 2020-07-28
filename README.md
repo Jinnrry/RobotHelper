@@ -23,6 +23,7 @@
 
 3.新增拖动操作
 
+[使用指南](https://github.com/Jinnrry/RobotHelper/wiki/%E5%9F%BA%E4%BA%8EWEB%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97)
 
 
 

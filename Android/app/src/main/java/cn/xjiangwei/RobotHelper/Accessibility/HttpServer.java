@@ -79,7 +79,7 @@ public class HttpServer extends NanoHTTPD {
                 break;
             case "/tap":
                 try {
-                    Robot.tap(Integer.parseInt(parms.get("x")), Integer.parseInt(parms.get("y")), Long.parseLong(parms.get("delay")));
+                    Robot.tap(Integer.parseInt(parms.get("x")), Integer.parseInt(parms.get("y")), (long) (Float.parseFloat(parms.get("delay")) * 1000));
                     ret = "{\"code\":200,\"msg\":\"success\"}";
                 } catch (Exception e) {
                     ret = "{\"code\":500,\"msg\":\"检查是否开启xposed\"}";

@@ -49,6 +49,15 @@ import cn.xjiangwei.RobotHelper.Tools.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
+
+
+    static {
+        System.LoadLibrary("Sendevent");
+    }
+
+
+    public native String stringFromJNI();
+
     private static final int REQUEST_CODE = 1050;
     private String TAG = "Service";
     private MainApplication mainApplication;
@@ -132,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -188,4 +196,9 @@ public class MainActivity extends AppCompatActivity {
         hsStatus.setText((RunTime.httpServer != null && RunTime.httpServer.runing) ? "HttpServer状态：已开启" : "HttpServer状态：未开启");
     }
 
+    public void test(View view) {
+
+        System.out.println(stringFromJNI());
+
+    }
 }

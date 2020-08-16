@@ -9,6 +9,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
     }
     buildTypes {
         release {
@@ -21,6 +26,11 @@ android {
         targetCompatibility = '1.8'
     }
     buildToolsVersion = '28.0.3'
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
 }
 
 dependencies {

@@ -11,7 +11,7 @@ public class Hook4XposedCheck {
     public static void run(XC_LoadPackage.LoadPackageParam lpparam) {
         if (lpparam.packageName.equals("cn.xjiangwei.RobotHelper")) {
             // 检查xp框架加载是否成功
-            XposedHelpers.findAndHookMethod("cn.xjiangwei.RobotHelper.MainActivity", lpparam.classLoader, "checkXposedHook",
+            XposedHelpers.findAndHookMethod("cn.xjiangwei.RobotHelper.MainApplication", lpparam.classLoader, "checkXposedHook",
                     new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {

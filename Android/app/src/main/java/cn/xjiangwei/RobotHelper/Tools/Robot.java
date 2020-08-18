@@ -1,126 +1,134 @@
 package cn.xjiangwei.RobotHelper.Tools;
 
-import android.app.Instrumentation;
-import android.os.SystemClock;
-import android.view.MotionEvent;
+
+import android.os.Build;
+
+import cn.xjiangwei.RobotHelper.MainApplication;
+import cn.xjiangwei.RobotHelper.Tools.InputImp.AccessibilityInput;
+import cn.xjiangwei.RobotHelper.Tools.InputImp.Input;
+import cn.xjiangwei.RobotHelper.Tools.InputImp.InstrumentationInput;
+import cn.xjiangwei.RobotHelper.Tools.InputImp.NullInput;
 
 
+/**
+ * 模拟操作的实现类
+ * <p>
+ * 目前只使用了xposed提权实现
+ * <p>
+ * 未来可能考虑加入root权限的实现
+ */
 public class Robot {
-    private static Instrumentation mInst = null;
 
 
-    public static void tap(final int x, final int y) {
-        if (x < 0 || y < 0) {
-            return;
-        }
+    private static int execType;
 
-        if (Robot.mInst == null) {
-            mInst = new Instrumentation();
+    public static final int ExecTypeXposed = 389;
+    public static final int ExecTypeAccessibillty = 18;
+    public static final int ExecTypeNull = 115;
 
-        }
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, x, y, 0));    //x,y 即是事件的坐标
-                mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, x, y, 0));
+    private static Input getInput() {
+        MainApplication mainApplication = MainApplication.getInstance();
+
+        // 没有手动设置模式的时候
+        if (execType == 0) {
+            // 有xposed权限优先使用xposed提权方式
+            if (mainApplication.checkXposedHook()) {
+                execType = ExecTypeXposed;
+                return InstrumentationInput.getInstance();
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && mainApplication.checkAccessibilityService()) {
+                execType = ExecTypeAccessibillty;
+                return AccessibilityInput.getInstance();
+            } else {
+                return NullInput.getInstance();
             }
-        };
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-    public static void tap(final int x, final int y, final long delay) {
-        if (Robot.mInst == null) {
-            mInst = new Instrumentation();
-        }
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, x, y, 0));    //x,y 即是事件的坐标
-                try {
-                    sleep(delay);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, x, y, 0));
+        } else {
+            switch (execType) {
+                case ExecTypeAccessibillty:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && mainApplication.checkAccessibilityService()) {
+                        return AccessibilityInput.getInstance();
+                    }
+                case ExecTypeXposed:
+                    if (mainApplication.checkXposedHook()) {
+                        return InstrumentationInput.getInstance();
+                    }
+                case ExecTypeNull:
+                    return NullInput.getInstance();
+                default:
+                    return NullInput.getInstance();
             }
-        };
 
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
-
-    public static void tap(Point p) {
-        tap(p.getX(), p.getY());
-    }
-
-
-    public static void tap(Point p, long delay) {
-        tap(p.getX(), p.getY(), delay);
-    }
-
-    public static void swipe(float x1, float y1, float x2, float y2, float duration) {
-        final int interval = 25;
-        int steps = (int) (duration * 1000 / interval + 1);
-        float dx = (x2 - x1) / steps;
-        float dy = (y2 - y1) / steps;
-        down(x1, y1);
-        for (int step = 0; step < steps; step++) {
-            SystemClock.sleep(interval);
-            moveTo(x1 + step * dx, y1 + step * dy, 0);
-        }
-        SystemClock.sleep(interval);
-        up(x2, y2);
-    }
-
-
-    private static void down(float x, float y) {
-        if (Robot.mInst == null) {
-            mInst = new Instrumentation();
-        }
-        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, x, y, 0));
-    }
-
-
-    private static void up(float x, float y) {
-        if (Robot.mInst == null) {
-            mInst = new Instrumentation();
-        }
-        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, x, y, 0));
-    }
-
-
-    private static void moveTo(float x, float y, int contactId) {
-        if (Robot.mInst == null) {
-            mInst = new Instrumentation();
-        }
-        mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE, x, y, 0));
+    /**
+     * 设置以什么方式执行模拟操作
+     * <p>
+     * 目前支持无障碍和xposed提权操作
+     *
+     * @param execType
+     */
+    public static void setExecType(int execType) {
+        Robot.execType = execType;
     }
 
 
     /**
-     * TODO 待实现
+     * 点击操作
+     *
+     * @param x
+     * @param y
+     */
+    public static void tap(final int x, final int y) {
+        getInput().tap(x, y);
+    }
+
+    /**
+     * 长按操作，可以自定义按下时间，单位为毫秒
+     *
+     * @param x
+     * @param y
+     * @param delay
+     */
+    public static void tap(final int x, final int y, final long delay) {
+        getInput().tap(x, y, delay);
+    }
+
+
+    public static void tap(Point p) {
+        getInput().tap(p);
+    }
+
+
+    public static void tap(Point p, long delay) {
+        getInput().tap(p, delay);
+    }
+
+
+    /**
+     * 拖拽操作
+     *
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param duration //单位为毫秒
+     */
+    public static void swipe(int x1, int y1, int x2, int y2, int duration) {
+        getInput().swipe(x1, y1, x2, y2, duration);
+    }
+
+    public static void swipe(float x1, float y1, float x2, float y2, float duration) {
+        getInput().swipe(x1, y1, x2, y2, duration);
+    }
+
+
+    /**
+     * 往输入框输入文字
+     *
      * @param str
      */
     public static void input(String str) {
-//        if (Robot.mInst == null) {
-//            mInst = new Instrumentation();
-//        }
-
-
+        getInput().input(str);
     }
-
 
 }

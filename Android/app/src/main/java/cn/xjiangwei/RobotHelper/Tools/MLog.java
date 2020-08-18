@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class MLog {
 
-    private static final boolean debug = true;
+    private static final boolean debug = false;
 
     private static String Tag = "RobotHelper";
 

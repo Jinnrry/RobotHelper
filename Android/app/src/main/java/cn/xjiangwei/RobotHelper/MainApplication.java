@@ -2,26 +2,18 @@ package cn.xjiangwei.RobotHelper;
 
 import android.app.Application;
 
+import cn.xjiangwei.RobotHelper.Service.Accessibility;
+import cn.xjiangwei.RobotHelper.Service.RunTime;
 
 
 public class MainApplication extends Application {
     public static int sceenWidth = 0;
     public static int sceenHeight = 0;
     public static int dpi;
-    private static String serverUrl = "http://192.168.199.241:8001/";
     private static MainApplication instance;
-
 
     public static MainApplication getInstance() {
         return instance;
-    }
-
-    public static String getServerUrl() {
-        return serverUrl;
-    }
-
-    public static void setServerUrl(String serverUrl) {
-        MainApplication.serverUrl = serverUrl;
     }
 
 
@@ -39,4 +31,16 @@ public class MainApplication extends Application {
         return 2;
     }
 
+
+    public boolean checkXposedHook() {
+        return false;
+    }
+
+    public boolean checkAccessibilityService() {
+        return Accessibility.DOM != null;
+    }
+
+    public boolean checkHttpServer() {
+        return RunTime.httpServer != null && RunTime.httpServer.runing;
+    }
 }

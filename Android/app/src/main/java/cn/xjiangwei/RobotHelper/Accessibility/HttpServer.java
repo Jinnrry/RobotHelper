@@ -18,7 +18,6 @@ import cn.xjiangwei.RobotHelper.Service.Accessibility;
 import cn.xjiangwei.RobotHelper.Tools.Robot;
 import fi.iki.elonen.NanoHTTPD;
 
-import static android.support.v4.content.ContextCompat.getSystemService;
 
 public class HttpServer extends NanoHTTPD {
 
@@ -63,7 +62,7 @@ public class HttpServer extends NanoHTTPD {
                 } else if (parms.containsKey("id")) {
                     ret = dumpHierarchyImpl(Accessibility.DOM.findAccessibilityNodeInfosByViewId(parms.get("id")), false).toString();
                 } else {
-                    ret = dumpHierarchyImpl(new Node(Accessibility.DOM, 1440, 3120), false).toString();
+                    ret = dumpHierarchyImpl(new Node(Accessibility.DOM, MainApplication.sceenWidth, MainApplication.sceenHeight), false).toString();
                 }
                 break;
             case "/sceenSize":
@@ -71,7 +70,7 @@ public class HttpServer extends NanoHTTPD {
                 break;
             case "/swipe":
                 try {
-                    Robot.swipe(Float.parseFloat(parms.get("start_x")), Float.parseFloat(parms.get("start_y")), Float.parseFloat(parms.get("end_x")), Float.parseFloat(parms.get("end_y")), Float.parseFloat(parms.get("duration")));
+                    Robot.swipe(Float.parseFloat(parms.get("start_x")), Float.parseFloat(parms.get("start_y")), Float.parseFloat(parms.get("end_x")), Float.parseFloat(parms.get("end_y")), Float.parseFloat(parms.get("duration")) * 1000);
                     ret = "{\"code\":200,\"msg\":\"success\"}";
                 } catch (Exception e) {
                     ret = "{\"code\":500,\"msg\":\"检查是否开启xposed\"}";
@@ -110,7 +109,7 @@ public class HttpServer extends NanoHTTPD {
     public JSONArray dumpHierarchyImpl(List<AccessibilityNodeInfo> nodes, boolean onlyVisibleNode) {
         JSONArray jsonArray = new JSONArray();
         for (AccessibilityNodeInfo node : nodes) {
-            jsonArray.put(dumpHierarchyImpl(new Node(node, 3120, 1440), onlyVisibleNode));
+            jsonArray.put(dumpHierarchyImpl(new Node(node, MainApplication.sceenWidth, MainApplication.sceenHeight), onlyVisibleNode));
         }
 
         return jsonArray;

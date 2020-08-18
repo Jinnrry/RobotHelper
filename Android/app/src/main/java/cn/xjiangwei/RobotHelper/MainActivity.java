@@ -3,8 +3,8 @@ package cn.xjiangwei.RobotHelper;
 import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
@@ -15,35 +15,22 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.dfqin.grantor.PermissionListener;
 import com.github.dfqin.grantor.PermissionsUtil;
-import com.googlecode.tesseract.android.TessBaseAPI;
-import com.lahm.library.EasyProtectorLib;
-import com.lahm.library.EmulatorCheckCallback;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.android.Utils;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
-import cn.xjiangwei.RobotHelper.Accessibility.HttpServer;
 import cn.xjiangwei.RobotHelper.Service.Accessibility;
 import cn.xjiangwei.RobotHelper.Service.RunTime;
 import cn.xjiangwei.RobotHelper.Tools.MLog;
-import cn.xjiangwei.RobotHelper.Tools.Robot;
-import cn.xjiangwei.RobotHelper.Tools.ScreenCaptureUtil;
 import cn.xjiangwei.RobotHelper.Tools.ScreenCaptureUtilByMediaPro;
+import cn.xjiangwei.RobotHelper.Tools.ShellUtils;
 import cn.xjiangwei.RobotHelper.Tools.TessactOcr;
 import cn.xjiangwei.RobotHelper.Tools.Toast;
 
@@ -52,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     static {
-        System.LoadLibrary("Sendevent");
+        System.loadLibrary("sendEvent");
     }
 
 
-    public native String stringFromJNI();
+    public native String sendEvent(String arg1, String arg2, String arg3);
 
     private static final int REQUEST_CODE = 1050;
     private String TAG = "Service";
@@ -198,7 +185,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void test(View view) {
 
-        System.out.println(stringFromJNI());
+        System.out.println(sendEvent("1", "116", "1"));
+        System.out.println(sendEvent("0", "0", "0"));
+
+        System.out.println(sendEvent("1", "116", "1"));
+        System.out.println(sendEvent("0", "0", "0"));
+
+        ShellUtils.CommandResult whoami = ShellUtils.execCommand("whoami", false);
+        System.out.println(whoami.successMsg);
 
     }
 }

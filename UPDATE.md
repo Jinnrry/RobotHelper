@@ -1,6 +1,7 @@
 ## V2.1版本新功能
 
 1.底层点击实现新增了无障碍接口实现,你可以使用`Robot.setExecType(Robot.ExecTypeXposed);`或者`Robot.setExecType(Robot.ExecTypeAccessibillty);`切换实现方式
+
 2.代码整理（But 整理后依然很乱）
 
 

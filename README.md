@@ -25,7 +25,7 @@ Point point = Image.findPointByMulColor(ScreenCaptureUtil.getScreenCap(), "434FD
 Robot.tap(point);
 ```
 
-以上代码将会在屏幕中查找![chrome](./docs/chrome.png =100x100)图标，然后点击这个图标（你直接运行这段代码可能不会成功，因为你的手机屏幕尺寸跟我不一样）
+以上代码将会在屏幕中查找  <img src="./docs/chrome.png" width="100px" />  图标，然后点击这个图标（你直接运行这段代码可能不会成功，因为你的手机屏幕尺寸跟我不一样）
 
 
 ```

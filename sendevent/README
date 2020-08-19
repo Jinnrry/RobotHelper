@@ -11,4 +11,4 @@
 
 ### 实现原理
 
-这个文件参考了https://android.googlesource.com/platform/system/core/+/android-5.0.2_r3/toolbox/sendevent.c 这个是android sendevent工具源码
+这个文件参考了 [https://android.googlesource.com/platform/system/core/+/android-5.0.2_r3/toolbox/sendevent.c](https://android.googlesource.com/platform/system/core/+/android-5.0.2_r3/toolbox/sendevent.c) 这个是android sendevent工具源码

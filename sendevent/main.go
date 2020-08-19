@@ -29,11 +29,16 @@ func main() {
 			fmt.Println("ERROR!" + err.Error())
 			return
 		} else {
+			defer device.Close()
 			for true {
-				fmt.Scanln(&inputEvent.Type, &inputEvent.Code, &inputEvent.Value)
-				err = binary.Write(device, binary.LittleEndian, inputEvent)
+				_, err = fmt.Scanln(&inputEvent.Type, &inputEvent.Code, &inputEvent.Value)
 				if err != nil {
 					fmt.Println("ERROR" + err.Error())
+				} else {
+					err = binary.Write(device, binary.LittleEndian, inputEvent)
+					if err != nil {
+						fmt.Println("ERROR" + err.Error())
+					}
 				}
 			}
 		}

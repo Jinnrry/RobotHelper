@@ -34,14 +34,13 @@ MLog.info("文字识别结果：" + s);
 ```
 以上代码将输出(0,0)到(200,30)这个矩形区域内的文字。
 
-chi_sim表示语言为简体中文，默认语言包只有chi_sim和eng(英语)
+`chi_sim`表示语言为简体中文，默认语言包只有chi_sim和eng(英语)
 
 你可以自己引入TessactOcr所支持的任意语言。[语言包下载](https://github.com/tesseract-ocr/tessdata_best)
 
 
-## [更新日志](./UPDATE.md)
+### [更新日志](./UPDATE.md)
 
-## [更新日志](./UPDATE.md)
 
 
 ## 未来规划

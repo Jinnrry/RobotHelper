@@ -46,3 +46,11 @@ MLog.info("文字识别结果：" + s);
 ## 未来规划
 
 - [ ] 1.添加Root权限实现底层点击操作
+
+## Thanks
+
+Thanks for all these great works that make this project better.
+
+- [Airtest](https://github.com/AirtestProject/Airtest)
+- [Tesseract](https://github.com/tesseract-ocr/tesseract)
+- [AutoJS](https://github.com/hyb1996/Auto.js)

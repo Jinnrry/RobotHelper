@@ -1,3 +1,8 @@
+## V2.2版本新功能
+
+1.加入了Root权限实现点击操作，目前仅在oneplus 7pro上测试通过，不保证所有手机兼容。遇到无法使用的问题欢迎提bug
+
+
 ## V2.1版本新功能
 
 1.底层点击实现新增了无障碍接口实现,你可以使用`Robot.setExecType(Robot.ExecTypeXposed);`或者`Robot.setExecType(Robot.ExecTypeAccessibillty);`切换实现方式

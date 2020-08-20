@@ -22,6 +22,8 @@
             android:layout_height="wrap_content"
             android:onClick="openLog"
             android:text="打开日志" />
+
+
     </LinearLayout>
 
     <TextView

@@ -11,8 +11,9 @@
 [wiki](https://github.com/Jinnrry/RobotHelper/wiki)
 
 
-该框架主要是方便游戏、爬虫项目的快速开发。比按键精灵等商业软件扩展性强，比AutoJS等更轻量
+该框架主要是方便Android游戏、爬虫项目的快速开发。比按键精灵等商业软件扩展性强，比AutoJS等更轻量，更适合二次开发。
 
+支持无缝切换使用无障碍、Root、xposed三种方式提权实现点击等模拟操作。
 
 
 

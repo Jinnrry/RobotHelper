@@ -8,6 +8,7 @@ import cn.xjiangwei.RobotHelper.Tools.InputImp.AccessibilityInput;
 import cn.xjiangwei.RobotHelper.Tools.InputImp.Input;
 import cn.xjiangwei.RobotHelper.Tools.InputImp.InstrumentationInput;
 import cn.xjiangwei.RobotHelper.Tools.InputImp.NullInput;
+import cn.xjiangwei.RobotHelper.Tools.InputImp.RootInput;
 
 
 /**
@@ -15,7 +16,6 @@ import cn.xjiangwei.RobotHelper.Tools.InputImp.NullInput;
  * <p>
  * 目前只使用了xposed提权实现
  * <p>
- * 未来可能考虑加入root权限的实现
  */
 public class Robot {
 
@@ -24,6 +24,7 @@ public class Robot {
 
     public static final int ExecTypeXposed = 389;
     public static final int ExecTypeAccessibillty = 18;
+    public static final int ExecTypeROOT = 605;
     public static final int ExecTypeNull = 115;
 
     private static Input getInput() {
@@ -43,6 +44,8 @@ public class Robot {
             }
         } else {
             switch (execType) {
+                case ExecTypeROOT:
+                    return RootInput.getInstance();
                 case ExecTypeAccessibillty:
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && mainApplication.checkAccessibilityService()) {
                         return AccessibilityInput.getInstance();

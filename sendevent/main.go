@@ -23,15 +23,17 @@ type InputEvent struct {
 }
 
 func init() {
-	f, err := os.OpenFile("input.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("error opening file: %v", err)
-	}
-	log.SetOutput(f)
+	//f, err := os.OpenFile("/data/user/0/cn.xjiangwei.RobotHelper/cache/input.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	//if err != nil {
+	//	log.Fatalf("error opening file: %v", err)
+	//}
+	//log.SetOutput(f)
 }
 
 func main() {
 	if _, err := os.Stat(os.Args[1]); err == nil {
+		log.Println(os.Args[1])
+		fmt.Println(os.Args[1])
 		inputEvent := InputEvent{}
 		device, err := os.OpenFile(os.Args[1], os.O_RDWR, 0777)
 		if err != nil {

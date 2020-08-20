@@ -35,7 +35,7 @@ public class Main {
 
         //Robot.setExecType(Robot.ExecTypeXposed);         //使用xposed权限执行模拟操作，建议优先使用此方式
         //Robot.setExecType(Robot.ExecTypeAccessibillty);  //使用安卓无障碍接口执行模拟操作
-
+        //Robot.setExecType(Robot.ExecTypeROOT)            //使用root权限执行模拟操作（实验阶段，仅在oneplus 7pro测试过，欢迎提bug）
 
         /****************************  模板匹配demo  *******************************/
         InputStream is = null;
@@ -61,7 +61,7 @@ public class Main {
         }
         bitmap = BitmapFactory.decodeStream(is);
 
-        String res = TessactOcr.img2string(ScreenCaptureUtil.getScreenCap(0,0,200,30), "chi_sim", "", "");
+        String res = TessactOcr.img2string(ScreenCaptureUtil.getScreenCap(0, 0, 200, 30), "chi_sim", "", "");
         MLog.info("文字识别结果：" + res);
 
 

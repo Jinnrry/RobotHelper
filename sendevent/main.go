@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/binary"
 	"fmt"
+	"log"
 	"os"
 	"syscall"
 )
@@ -21,12 +22,21 @@ type InputEvent struct {
 	Value int32
 }
 
+func init() {
+	f, err := os.OpenFile("input.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	log.SetOutput(f)
+}
+
 func main() {
 	if _, err := os.Stat(os.Args[1]); err == nil {
 		inputEvent := InputEvent{}
 		device, err := os.OpenFile(os.Args[1], os.O_RDWR, 0777)
 		if err != nil {
 			fmt.Println("ERROR!" + err.Error())
+			log.Println("ERROR!" + err.Error())
 			return
 		} else {
 			defer device.Close()
@@ -34,16 +44,20 @@ func main() {
 				_, err = fmt.Scanln(&inputEvent.Type, &inputEvent.Code, &inputEvent.Value)
 				if err != nil {
 					fmt.Println("ERROR" + err.Error())
+					log.Println("ERROR" + err.Error())
 				} else {
 					err = binary.Write(device, binary.LittleEndian, inputEvent)
+					log.Println(inputEvent)
 					if err != nil {
 						fmt.Println("ERROR" + err.Error())
+						log.Println("ERROR" + err.Error())
 					}
 				}
 			}
 		}
 	} else {
 		fmt.Println(err.Error())
+		log.Println(err.Error())
 	}
 
 }

@@ -26,6 +26,7 @@ import org.opencv.android.OpenCVLoader;
 import java.io.File;
 
 import cn.xjiangwei.RobotHelper.Service.RunTime;
+import cn.xjiangwei.RobotHelper.Tools.InputImp.RootInput;
 import cn.xjiangwei.RobotHelper.Tools.MLog;
 import cn.xjiangwei.RobotHelper.Tools.ScreenCaptureUtilByMediaPro;
 import cn.xjiangwei.RobotHelper.Tools.TessactOcr;
@@ -171,4 +172,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void test(View view) {
+        RootInput rootInput = RootInput.getInstance();
+        rootInput.tap(0,0);
+
+
+    }
 }

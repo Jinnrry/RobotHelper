@@ -21,9 +21,8 @@ import static android.os.SystemClock.sleep;
 
 /**
  * 目前处于实验性阶段，仅在oneplus 7 pro上测试通过，不保证所有手机兼容！！
- *
+ * <p>
  * 这个文件的实现原理是调用go写的二进制文件，发送硬件指令到/dev/input/event*文件中
- *
  */
 public class RootInput implements Input {
 
@@ -1011,6 +1010,9 @@ public class RootInput implements Input {
 
     @Override
     public void tap(int x, int y, long delay) {
+        if (x < 0 || y < 0) {
+            return;
+        }
         down(x, y);
         sleep(delay);
         up();

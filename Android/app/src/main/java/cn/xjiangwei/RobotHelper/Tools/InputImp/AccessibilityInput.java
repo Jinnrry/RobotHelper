@@ -29,6 +29,9 @@ public class AccessibilityInput implements Input {
 
     @Override
     public void tap(int x, int y) {
+        if (x < 0 || y < 0) {
+            return;
+        }
         GestureDescription.Builder builder = new GestureDescription.Builder();
         Path path = new Path();
         path.moveTo((float) x, (float) y);
@@ -46,6 +49,9 @@ public class AccessibilityInput implements Input {
 
     @Override
     public void tap(int x, int y, long delay) {
+        if (x < 0 || y < 0) {
+            return;
+        }
         GestureDescription.Builder builder = new GestureDescription.Builder();
         Path path = new Path();
         path.moveTo((float) x, (float) y);

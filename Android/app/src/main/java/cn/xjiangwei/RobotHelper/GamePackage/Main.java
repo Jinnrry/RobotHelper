@@ -32,7 +32,7 @@ public class Main {
      */
     public void start() {
         sleep(5000); //点击开始后等待5秒后再执行，因为状态栏收起有动画时间，建议保留这行代码
-
+        MLog.setDebug(true);
         //Robot.setExecType(Robot.ExecTypeXposed);         //使用xposed权限执行模拟操作，建议优先使用此方式
         //Robot.setExecType(Robot.ExecTypeAccessibillty);  //使用安卓无障碍接口执行模拟操作
         //Robot.setExecType(Robot.ExecTypeROOT)            //使用root权限执行模拟操作（实验阶段，仅在oneplus 7pro测试过，欢迎提bug）

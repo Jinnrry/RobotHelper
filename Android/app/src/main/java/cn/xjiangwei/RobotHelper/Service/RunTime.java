@@ -144,7 +144,6 @@ public class RunTime extends Service {
             if (action.equals(ACTION_BUTTON)) {
                 //通过传递过来的ID判断按钮点击属性或者通过getResultCode()获得相应点击事件
                 int buttonId = intent.getIntExtra(INTENT_BUTTONID_TAG, 0);
-                System.out.println(buttonId);
                 switch (buttonId) {
                     case START:
                         collapseStatusBar(context);

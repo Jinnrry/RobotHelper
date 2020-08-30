@@ -878,6 +878,7 @@ public class RootInput implements Input {
     // 将sendevent移动到可执行位置
     private void initBinFile() {
         File tmp = new File(MainApplication.getInstance().getCacheDir(), "sendevent");
+        // todo 这里可以自动识别cpu架构，然后自动切换
         FileUtils.copyAsset(MainApplication.getInstance(), "sendevent/arm64/sendevent", tmp.getAbsolutePath());
         ShellUtils.execCommand("chmod 777 " + tmp.getAbsolutePath(), true);
         sendeventPath = tmp.getAbsolutePath();

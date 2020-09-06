@@ -1,0 +1,7 @@
+.idea/*
+.gradle
+
+
+.DS_Store
+sendevent/.DS_Store
+sendevent/bin/.DS_Store

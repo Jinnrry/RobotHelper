@@ -1,3 +1,12 @@
+## V2.3版本新功能
+
+1.加入双指缩放功能
+
+感谢chongkaechin实现。
+
+https://github.com/Jinnrry/RobotHelper/issues/13
+
+
 ## V2.2版本新功能
 
 1.加入了Root权限实现点击操作，目前仅在oneplus 7pro上测试通过，不保证所有手机兼容。遇到无法使用的问题欢迎提bug

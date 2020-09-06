@@ -61,4 +61,17 @@ public class NullInput implements Input {
         MLog.error("没有权限执行操作！请检查xposed或者无障碍权限！");
         Toast.show("没有权限执行操作！请检查xposed或者无障碍权限！");
     }
+
+
+    @Override
+    public void pinchOpen(int distance) {
+        MLog.error("没有权限执行操作！请检查xposed或者无障碍权限！");
+        Toast.show("没有权限执行操作！请检查xposed或者无障碍权限！");
+    }
+
+    @Override
+    public void pinchClose(int distance) {
+        MLog.error("没有权限执行操作！请检查xposed或者无障碍权限！");
+        Toast.show("没有权限执行操作！请检查xposed或者无障碍权限！");
+    }
 }

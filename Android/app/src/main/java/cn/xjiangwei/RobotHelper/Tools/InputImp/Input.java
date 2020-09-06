@@ -6,8 +6,6 @@ import cn.xjiangwei.RobotHelper.Tools.Point;
 public interface Input {
 
 
-
-
     /**
      * 点击操作
      *
@@ -52,4 +50,21 @@ public interface Input {
      * @param str
      */
     void input(String str);
+
+
+    /**
+     * 放大屏幕（双指捏开）
+     *
+     * @param distance // 距离  // 缩放距离，0到100
+     */
+    void pinchOpen(int distance);
+
+
+    /**
+     * 缩小屏幕（双指捏合）
+     *
+     * @param distance // 距离 // 缩放距离，0到100
+     */
+    void pinchClose(int distance);
+
 }

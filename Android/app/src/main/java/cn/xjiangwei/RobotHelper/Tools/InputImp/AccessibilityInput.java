@@ -6,7 +6,9 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import cn.xjiangwei.RobotHelper.Service.Accessibility;
+import cn.xjiangwei.RobotHelper.Tools.MLog;
 import cn.xjiangwei.RobotHelper.Tools.Point;
+import cn.xjiangwei.RobotHelper.Tools.Toast;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class AccessibilityInput implements Input {
@@ -100,5 +102,17 @@ public class AccessibilityInput implements Input {
     @Override
     public void input(String str) {
 
+    }
+
+    @Override
+    public void pinchOpen(int distance) {
+        Toast.show("目前仅在xposed方式中实现了该方法");
+        MLog.error("目前仅在xposed方式中实现了该方法");
+    }
+
+    @Override
+    public void pinchClose(int distance) {
+        Toast.show("目前仅在xposed方式中实现了该方法");
+        MLog.error("目前仅在xposed方式中实现了该方法");
     }
 }

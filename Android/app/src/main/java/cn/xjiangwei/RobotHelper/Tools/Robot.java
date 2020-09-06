@@ -134,4 +134,24 @@ public class Robot {
         getInput().input(str);
     }
 
+
+    /**
+     * 放大屏幕（捏开）
+     *
+     * @param distance  // 缩放距离，0到100
+     */
+    public static void pinchOpen(int distance) {
+        getInput().pinchOpen(distance);
+    }
+
+
+    /**
+     * 缩小屏幕（捏合）
+     *
+     * @param distance  // 缩放距离，0到100
+     */
+    public static void pinchClose(int distance) {
+        getInput().pinchClose(distance);
+    }
+
 }

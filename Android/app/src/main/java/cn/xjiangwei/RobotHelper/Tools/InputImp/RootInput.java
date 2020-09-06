@@ -13,8 +13,10 @@ import java.util.regex.Pattern;
 
 import cn.xjiangwei.RobotHelper.MainApplication;
 import cn.xjiangwei.RobotHelper.Tools.FileUtils;
+import cn.xjiangwei.RobotHelper.Tools.MLog;
 import cn.xjiangwei.RobotHelper.Tools.Point;
 import cn.xjiangwei.RobotHelper.Tools.ShellUtils;
+import cn.xjiangwei.RobotHelper.Tools.Toast;
 
 import static android.os.SystemClock.sleep;
 
@@ -1071,5 +1073,17 @@ public class RootInput implements Input {
         exec(EV_ABS, ABS_MT_TRACKING_ID, 0xffffffff);
         exec(EV_KEY, BTN_TOUCH, UP);
         exec(EV_SYN, SYN_REPORT, 0x00000000);
+    }
+
+    @Override
+    public void pinchOpen(int distance) {
+        Toast.show("目前仅在xposed方式中实现了该方法");
+        MLog.error("目前仅在xposed方式中实现了该方法");
+    }
+
+    @Override
+    public void pinchClose(int distance) {
+        Toast.show("目前仅在xposed方式中实现了该方法");
+        MLog.error("目前仅在xposed方式中实现了该方法");
     }
 }

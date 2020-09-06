@@ -72,6 +72,13 @@ public class Main {
         Robot.tap(point);
 
 
+        /*****************************  双指缩放操作  ************************************/
+
+
+//        Robot.pinchOpen(100);  // 目前仅在xposed模式中实现了该方法，distance值为0到100
+//        Robot.pinchClose(100);  // 目前仅在xposed模式中实现了该方法，
+
+
         /***** 提示  *****/
         Toast.show("运行结束！");
         //声音提示

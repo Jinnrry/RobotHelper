@@ -4,6 +4,7 @@ import android.app.Instrumentation;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 
+import cn.xjiangwei.RobotHelper.MainApplication;
 import cn.xjiangwei.RobotHelper.Tools.Point;
 
 import static android.os.SystemClock.sleep;
@@ -102,6 +103,222 @@ public class InstrumentationInput implements Input {
 
     @Override
     public void input(String str) {
+
+    }
+
+    /**
+     * https://github.com/Jinnrry/RobotHelper/issues/13
+     *
+     * @param distance // 距离  // 缩放距离，0到100
+     */
+    @Override
+    public void pinchOpen(int distance) {
+
+        if (distance > 100) {
+            distance = 100;
+        }
+
+        if (distance < 0) {
+            distance = 0;
+        }
+
+
+        final int center_X = MainApplication.sceenWidth / 2;
+        final int center_Y = MainApplication.sceenHeight / 2;
+
+        int point_x1 = 100;
+        int point_x2 = 700;
+
+
+        MotionEvent.PointerCoords pOneStart = new MotionEvent.PointerCoords();
+        pOneStart.pressure = 1;
+        pOneStart.x = (point_x2 + point_x1) / 2;
+        pOneStart.y = center_Y;
+        pOneStart.size = 1;
+
+        MotionEvent.PointerCoords pTwoStart = new MotionEvent.PointerCoords();
+        pTwoStart.pressure = 1;
+        pTwoStart.x = (point_x2 + point_x1) / 2;
+        pTwoStart.y = center_Y;
+        pTwoStart.size = 1;
+
+
+        MotionEvent.PointerProperties pProp1 = new MotionEvent.PointerProperties();
+        pProp1.id = 0;
+        pProp1.toolType = MotionEvent.TOOL_TYPE_FINGER;
+
+        MotionEvent.PointerProperties pProp2 = new MotionEvent.PointerProperties();
+        pProp2.id = 1;
+        pProp2.toolType = MotionEvent.TOOL_TYPE_FINGER;
+
+
+        MotionEvent.PointerCoords[] pCordStart = new MotionEvent.PointerCoords[]{pOneStart, pTwoStart};
+        MotionEvent.PointerProperties[] pProp = new MotionEvent.PointerProperties[]{pProp1, pProp2};
+
+
+        MotionEvent event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 25,
+                MotionEvent.ACTION_DOWN, 1, pProp, pCordStart, 0, 0, 1, 1, 0, 0, 0, 0);
+        mInst.sendPointerSync(event);
+
+        event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 25,
+                MotionEvent.ACTION_POINTER_2_DOWN, 2, pProp, pCordStart, 0, 0, 1, 1, 0, 0, 0, 0);
+        mInst.sendPointerSync(event);
+
+
+        for (int i = 0; i < distance; i++) {
+            MotionEvent.PointerCoords pOneTemp = new MotionEvent.PointerCoords();
+            pOneTemp.pressure = 1;
+            pOneTemp.x = (point_x2 + point_x1) / 2 + (i * ((float) point_x2 - point_x1) / 200);
+
+            pOneTemp.y = center_Y;
+            pOneTemp.size = 1;
+            MotionEvent.PointerCoords pTwoTemp = new MotionEvent.PointerCoords();
+            pTwoTemp.pressure = 1;
+            pTwoTemp.x = (point_x2 + point_x1) / 2 - (i * ((float) point_x2 - point_x1) / 200);
+
+            pTwoTemp.y = center_Y;
+            pTwoTemp.size = 1;
+            MotionEvent.PointerCoords[] pCordTemp = new MotionEvent.PointerCoords[]{pOneTemp, pTwoTemp};
+
+
+            event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+                    MotionEvent.ACTION_MOVE, 2, pProp, pCordTemp, 0, 0, 1, 1, 0, 0, 0, 0);
+            mInst.sendPointerSync(event);
+            sleep(25);
+        }
+
+
+        MotionEvent.PointerCoords pOneEnd = new MotionEvent.PointerCoords();
+        pOneEnd.pressure = 1;
+        pOneEnd.x = point_x2;
+        pOneEnd.y = center_Y;
+        pOneEnd.size = 1;
+
+        MotionEvent.PointerCoords pTwoEnd = new MotionEvent.PointerCoords();
+        pTwoEnd.pressure = 1;
+        pTwoEnd.x = point_x1;
+        pTwoEnd.y = center_Y;
+        pTwoEnd.size = 1;
+        MotionEvent.PointerCoords[] pCordEnd = new MotionEvent.PointerCoords[]{pOneEnd, pTwoEnd};
+
+
+        event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 25,
+                MotionEvent.ACTION_POINTER_2_UP, 2, pProp, pCordEnd, 0, 0, 1, 1, 0, 0, 0, 0);
+        mInst.sendPointerSync(event);
+
+
+        event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 25,
+                MotionEvent.ACTION_UP, 1, pProp, pCordEnd, 0, 0, 1, 1, 0, 0, 0, 0);
+        mInst.sendPointerSync(event);
+
+
+    }
+
+    /**
+     * https://github.com/Jinnrry/RobotHelper/issues/13
+     *
+     * @param distance // 距离 // 缩放距离，0到100
+     */
+    @Override
+    public void pinchClose(int distance) {
+
+        if (distance > 100) {
+            distance = 100;
+        }
+
+        if (distance < 0) {
+            distance = 0;
+        }
+
+
+        final int center_X = MainApplication.sceenWidth / 2;
+        final int center_Y = MainApplication.sceenHeight / 2;
+
+        int point_x1 = 100;
+        int point_x2 = 700;
+
+
+        MotionEvent.PointerCoords pOneStart = new MotionEvent.PointerCoords();
+        pOneStart.pressure = 1;
+        pOneStart.x = point_x1;
+        pOneStart.y = center_Y;
+        pOneStart.size = 1;
+
+        MotionEvent.PointerCoords pTwoStart = new MotionEvent.PointerCoords();
+        pTwoStart.pressure = 1;
+        pTwoStart.x = point_x2;
+        pTwoStart.y = center_Y;
+        pTwoStart.size = 1;
+
+
+        MotionEvent.PointerProperties pProp1 = new MotionEvent.PointerProperties();
+        pProp1.id = 0;
+        pProp1.toolType = MotionEvent.TOOL_TYPE_FINGER;
+
+        MotionEvent.PointerProperties pProp2 = new MotionEvent.PointerProperties();
+        pProp2.id = 1;
+        pProp2.toolType = MotionEvent.TOOL_TYPE_FINGER;
+
+
+        MotionEvent.PointerCoords[] pCordStart = new MotionEvent.PointerCoords[]{pOneStart, pTwoStart};
+        MotionEvent.PointerProperties[] pProp = new MotionEvent.PointerProperties[]{pProp1, pProp2};
+
+
+        MotionEvent event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 25,
+                MotionEvent.ACTION_DOWN, 1, pProp, pCordStart, 0, 0, 1, 1, 0, 0, 0, 0);
+        mInst.sendPointerSync(event);
+
+        event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 25,
+                MotionEvent.ACTION_POINTER_2_DOWN, 2, pProp, pCordStart, 0, 0, 1, 1, 0, 0, 0, 0);
+        mInst.sendPointerSync(event);
+
+
+        for (int i = 0; i < distance; i++) {
+            MotionEvent.PointerCoords pOneTemp = new MotionEvent.PointerCoords();
+            pOneTemp.pressure = 1;
+            pOneTemp.x = point_x1 + (i * ((float) point_x2 - point_x1) / 200);
+
+            pOneTemp.y = center_Y;
+            pOneTemp.size = 1;
+            MotionEvent.PointerCoords pTwoTemp = new MotionEvent.PointerCoords();
+            pTwoTemp.pressure = 1;
+            pTwoTemp.x = point_x2 - (i * ((float) point_x2 - point_x1) / 200);
+
+            pTwoTemp.y = center_Y;
+            pTwoTemp.size = 1;
+            MotionEvent.PointerCoords[] pCordTemp = new MotionEvent.PointerCoords[]{pOneTemp, pTwoTemp};
+
+
+            event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+                    MotionEvent.ACTION_MOVE, 2, pProp, pCordTemp, 0, 0, 1, 1, 0, 0, 0, 0);
+            mInst.sendPointerSync(event);
+            sleep(25);
+        }
+
+
+        MotionEvent.PointerCoords pOneEnd = new MotionEvent.PointerCoords();
+        pOneEnd.pressure = 1;
+        pOneEnd.x = (point_x2 + point_x1) / 2;
+        pOneEnd.y = center_Y;
+        pOneEnd.size = 1;
+
+        MotionEvent.PointerCoords pTwoEnd = new MotionEvent.PointerCoords();
+        pTwoEnd.pressure = 1;
+        pTwoEnd.x = (point_x2 + point_x1) / 2;
+        pTwoEnd.y = center_Y;
+        pTwoEnd.size = 1;
+        MotionEvent.PointerCoords[] pCordEnd = new MotionEvent.PointerCoords[]{pOneEnd, pTwoEnd};
+
+
+        event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 25,
+                MotionEvent.ACTION_POINTER_2_UP, 2, pProp, pCordEnd, 0, 0, 1, 1, 0, 0, 0, 0);
+        mInst.sendPointerSync(event);
+
+
+        event = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis() + 25,
+                MotionEvent.ACTION_UP, 1, pProp, pCordEnd, 0, 0, 1, 1, 0, 0, 0, 0);
+        mInst.sendPointerSync(event);
+
 
     }
 

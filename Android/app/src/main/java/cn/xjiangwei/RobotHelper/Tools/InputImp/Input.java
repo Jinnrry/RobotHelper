@@ -53,7 +53,7 @@ public interface Input {
 
 
     /**
-     * 放大屏幕（捏开）
+     * 放大屏幕（双指捏开）
      *
      * @param distance // 距离  // 缩放距离，0到100
      */
@@ -61,7 +61,7 @@ public interface Input {
 
 
     /**
-     * 缩小屏幕（捏合）
+     * 缩小屏幕（双指捏合）
      *
      * @param distance // 距离 // 缩放距离，0到100
      */

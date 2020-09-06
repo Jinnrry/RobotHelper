@@ -126,8 +126,8 @@ public class InstrumentationInput implements Input {
         final int center_X = MainApplication.sceenWidth / 2;
         final int center_Y = MainApplication.sceenHeight / 2;
 
-        int point_x1 = 100;
-        int point_x2 = 700;
+        int point_x1 = 100;  // 这里最好不要硬编码，小屏幕会出问题
+        int point_x2 = 700;  // 这里最好不要硬编码，小屏幕会出问题
 
 
         MotionEvent.PointerCoords pOneStart = new MotionEvent.PointerCoords();
@@ -165,6 +165,7 @@ public class InstrumentationInput implements Input {
         mInst.sendPointerSync(event);
 
 
+        // 一共一百步
         for (int i = 0; i < distance; i++) {
             MotionEvent.PointerCoords pOneTemp = new MotionEvent.PointerCoords();
             pOneTemp.pressure = 1;
@@ -234,8 +235,8 @@ public class InstrumentationInput implements Input {
         final int center_X = MainApplication.sceenWidth / 2;
         final int center_Y = MainApplication.sceenHeight / 2;
 
-        int point_x1 = 100;
-        int point_x2 = 700;
+        int point_x1 = 100;  // 这里最好不要硬编码，小屏幕会出问题
+        int point_x2 = 700;  // 这里最好不要硬编码，小屏幕会出问题
 
 
         MotionEvent.PointerCoords pOneStart = new MotionEvent.PointerCoords();

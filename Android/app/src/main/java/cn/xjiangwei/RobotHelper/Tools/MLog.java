@@ -31,7 +31,7 @@ public class MLog {
             Log.e(Tag, MLog.GetDate() + ":" + msg);
         } else {
             String storageDir = Environment.getExternalStorageDirectory().toString() + "/RobotHelper.log";
-            writeLog2file(storageDir, MLog.GetDate() + ":" + msg);
+            writeLog2file(storageDir, MLog.GetDate() + ":" + msg+ "\n");
         }
 
     }
@@ -41,7 +41,7 @@ public class MLog {
             Log.e(Tag, MLog.GetDate() + ":" + Arrays.toString(msg));
         } else {
             String storageDir = Environment.getExternalStorageDirectory().toString() + "/RobotHelper.log";
-            writeLog2file(storageDir, MLog.GetDate() + ":" + Arrays.toString(msg));
+            writeLog2file(storageDir, MLog.GetDate() + ":" + Arrays.toString(msg)+ "\n");
         }
     }
 
@@ -51,7 +51,7 @@ public class MLog {
             Log.e(tag, MLog.GetDate() + ":" + msg);
         } else {
             String storageDir = Environment.getExternalStorageDirectory().toString() + "/RobotHelper.log";
-            writeLog2file(storageDir, MLog.GetDate() + ":" + tag + ":" + msg);
+            writeLog2file(storageDir, MLog.GetDate() + ":" + tag + ":" + msg+ "\n");
         }
 
     }
@@ -61,7 +61,7 @@ public class MLog {
             Log.i(Tag, MLog.GetDate() + ":" + msg);
         } else {
             String storageDir = Environment.getExternalStorageDirectory().toString() + "/RobotHelper.log";
-            writeLog2file(storageDir, MLog.GetDate() + ":" + msg);
+            writeLog2file(storageDir, MLog.GetDate() + ":" + msg+ "\n");
         }
     }
 
@@ -70,7 +70,7 @@ public class MLog {
             Log.i(tag, MLog.GetDate() + ":" + msg);
         } else {
             String storageDir = Environment.getExternalStorageDirectory().toString() + "/RobotHelper.log";
-            writeLog2file(storageDir, tag + ":" + msg);
+            writeLog2file(storageDir, tag + ":" + msg+ "\n");
         }
     }
 

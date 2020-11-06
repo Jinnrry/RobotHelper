@@ -17,7 +17,6 @@ import java.nio.ByteBuffer;
 import cn.xjiangwei.RobotHelper.MainApplication;
 
 /**
- *
  * 截图的底层实现类
  * 这个类的方法不要在业务中直接调用
  * 业务中使用ScreenCaptureUtil类
@@ -29,41 +28,41 @@ public class ScreenCaptureUtilByMediaPro {
     public static Intent data;
     public static int resultCode;
     private static MediaProjection sMediaProjection;
-    private static ImageReader mImageReader;
-    private static VirtualDisplay mVirtualDisplay;
+    private static ImageReader mImageReaderHorizontal;
+    private static ImageReader mImageReaderVertical;
     private static Handler backgroundHandler;
 
-    private static Bitmap bitmapCache;
+    private static Bitmap bitmapCacheHorizontal;
+    private static Bitmap bitmapCacheVertical;
 
     public static void init() {
         sMediaProjection = mProjectionManager.getMediaProjection(resultCode, data);
         //start capture reader
-        mImageReader = ImageReader.newInstance(MainApplication.sceenWidth, MainApplication.sceenHeight,
+        mImageReaderHorizontal = ImageReader.newInstance(MainApplication.sceenWidth, MainApplication.sceenHeight,
                 PixelFormat.RGBA_8888, 2);
-        mVirtualDisplay = sMediaProjection.createVirtualDisplay(
+        sMediaProjection.createVirtualDisplay(
                 "ScreenShot",
                 MainApplication.sceenWidth,
                 MainApplication.sceenHeight,
                 MainApplication.dpi,
                 DisplayManager.VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY | DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC,
-                mImageReader.getSurface(),
+                mImageReaderHorizontal.getSurface(),
                 null,
                 null);
-//        mImageReader.setOnImageAvailableListener(reader -> {
-//            Bitmap bitmap = null;
-//            try (android.media.Image image = reader.acquireLatestImage()) {
-//                if (image != null) {
-//                    bitmap = covetBitmap(image);
-////                    if (ScreenCaptureUtil.screenCache != null) {
-////                        ScreenCaptureUtil.screenCache.recycle();
-////                    }
-//                    ScreenCaptureUtil.screenCache = bitmap;
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//        }, getBackgroundHandler());
+
+
+        mImageReaderVertical = ImageReader.newInstance(MainApplication.sceenHeight, MainApplication.sceenWidth,
+                PixelFormat.RGBA_8888, 2);
+        sMediaProjection.createVirtualDisplay(
+                "ScreenShot",
+                MainApplication.sceenHeight,
+                MainApplication.sceenWidth,
+                MainApplication.dpi,
+                DisplayManager.VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY | DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC,
+                mImageReaderVertical.getSurface(),
+                null,
+                null);
+
 
     }
 
@@ -74,22 +73,48 @@ public class ScreenCaptureUtilByMediaPro {
      * @return
      */
     @Deprecated
-    public static Bitmap getScreenCap() {
+    public static Bitmap getScreenCapHorizontal() {
 
         Bitmap bitmap;
         android.media.Image image;
         do {
-            image = mImageReader.acquireLatestImage();
-            if (image == null && bitmapCache != null) {
-                return bitmapCache;
+            image = mImageReaderHorizontal.acquireLatestImage();
+            if (image == null && bitmapCacheHorizontal != null) {
+                return bitmapCacheHorizontal;
             }
         } while (image == null);
         bitmap = covetBitmap(image);
-        if (bitmapCache != null) {
-            bitmapCache.recycle();
-            bitmapCache = null;
+        if (bitmapCacheHorizontal != null) {
+            bitmapCacheHorizontal.recycle();
+            bitmapCacheHorizontal = null;
         }
-        bitmapCache = bitmap;
+        bitmapCacheHorizontal = bitmap;
+        return bitmap;
+    }
+
+
+    /**
+     * 勿直接使用！！
+     *
+     * @return
+     */
+    @Deprecated
+    public static Bitmap getScreenCapVertical() {
+
+        Bitmap bitmap;
+        android.media.Image image;
+        do {
+            image = mImageReaderVertical.acquireLatestImage();
+            if (image == null && bitmapCacheVertical != null) {
+                return bitmapCacheVertical;
+            }
+        } while (image == null);
+        bitmap = covetBitmap(image);
+        if (bitmapCacheVertical != null) {
+            bitmapCacheVertical.recycle();
+            bitmapCacheVertical = null;
+        }
+        bitmapCacheVertical = bitmap;
         return bitmap;
     }
 
@@ -111,16 +136,6 @@ public class ScreenCaptureUtilByMediaPro {
         return bitmap;
     }
 
-    private static Handler getBackgroundHandler() {
-        if (backgroundHandler == null) {
-            HandlerThread backgroundThread =
-                    new HandlerThread("catwindow", android.os.Process
-                            .THREAD_PRIORITY_BACKGROUND);
-            backgroundThread.start();
-            backgroundHandler = new Handler(backgroundThread.getLooper());
-        }
-        return backgroundHandler;
-    }
 
     public static void stop() {
         sMediaProjection.stop();

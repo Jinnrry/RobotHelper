@@ -1,7 +1,10 @@
 package cn.xjiangwei.RobotHelper.Tools;
 
 
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
+
+import cn.xjiangwei.RobotHelper.MainApplication;
 
 
 /**
@@ -9,8 +12,23 @@ import android.graphics.Bitmap;
  */
 public class ScreenCaptureUtil {
 
-    private static long getScreenTime = 0;
-    public static Bitmap screenCache = null;
+    private static int screenOrientation;   // 0 未设置  ，1竖屏    2横批
+
+
+    /**
+     * 强制设置为横屏模式
+     */
+    public static void setHorizontalScreen() {
+        ScreenCaptureUtil.screenOrientation = 2;
+    }
+
+
+    /**
+     * 强制设置为竖屏模式
+     */
+    public static void setVerticalScreen() {
+        ScreenCaptureUtil.screenOrientation = 1;
+    }
 
 
     /**
@@ -19,7 +37,24 @@ public class ScreenCaptureUtil {
      * @return
      */
     public static Bitmap getScreenCap() {
-        Bitmap bitmap = Bitmap.createBitmap(ScreenCaptureUtilByMediaPro.getScreenCap());
+        Bitmap bitmap;
+
+        if (ScreenCaptureUtil.screenOrientation == 0) {
+            if (MainApplication.getInstance().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                //竖屏
+                bitmap = Bitmap.createBitmap(ScreenCaptureUtilByMediaPro.getScreenCapVertical());
+
+            } else {
+                //横屏
+                bitmap = Bitmap.createBitmap(ScreenCaptureUtilByMediaPro.getScreenCapHorizontal());
+            }
+        } else if (ScreenCaptureUtil.screenOrientation == 1) {
+            bitmap = Bitmap.createBitmap(ScreenCaptureUtilByMediaPro.getScreenCapVertical());
+        } else {
+            bitmap = Bitmap.createBitmap(ScreenCaptureUtilByMediaPro.getScreenCapHorizontal());
+        }
+
+
         return bitmap;
 
 

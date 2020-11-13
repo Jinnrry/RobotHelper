@@ -3,6 +3,7 @@ package cn.xjiangwei.RobotHelper.Accessibility;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
 import org.json.JSONArray;
@@ -97,6 +98,14 @@ public class HttpServer extends NanoHTTPD {
                 ClipboardManager cm = (ClipboardManager) MainApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData mClipData = ClipData.newPlainText("RobotHelp", parms.get("str"));
                 cm.setPrimaryClip(mClipData);
+                ret = "{\"code\":200,\"msg\":\"success\"}";
+                break;
+            case "/startApp":
+                Intent intent = MainApplication.getInstance().getPackageManager().getLaunchIntentForPackage("com.foundersc.app.xf");
+                if (intent != null) {
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    MainApplication.getInstance().startActivity(intent);
+                }
                 ret = "{\"code\":200,\"msg\":\"success\"}";
                 break;
         }

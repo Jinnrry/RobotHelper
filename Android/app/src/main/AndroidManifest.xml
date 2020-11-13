@@ -34,13 +34,16 @@
         <service
             android:name=".Service.RunTime"
             android:enabled="true"
-            android:exported="false" /> <!-- 是否是xposed模块，xposed根据这个来判断是否是模块 -->
+            android:exported="false" />
+        <!-- 是否是xposed模块，xposed根据这个来判断是否是模块 -->
         <meta-data
             android:name="xposedmodule"
-            android:value="true" /> <!-- 模块描述，显示在xposed模块列表那里第二行 -->
+            android:value="true" />
+        <!-- 模块描述，显示在xposed模块列表那里第二行 -->
         <meta-data
             android:name="xposeddescription"
-            android:value="点击权限拦截" /> <!-- 最低xposed版本号(lib文件名可知) -->
+            android:value="点击权限拦截" />
+        <!-- 最低xposed版本号(lib文件名可知) -->
         <meta-data
             android:name="xposedminversion"
             android:value="30" />

@@ -1,11 +1,9 @@
 package cn.xjiangwei.RobotHelper.Accessibility;
 
-import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.accessibility.AccessibilityNodeInfo;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;

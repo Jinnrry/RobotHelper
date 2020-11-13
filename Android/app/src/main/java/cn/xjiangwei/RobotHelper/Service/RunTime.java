@@ -9,7 +9,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -23,9 +22,6 @@ import cn.xjiangwei.RobotHelper.Accessibility.HttpServer;
 import cn.xjiangwei.RobotHelper.GamePackage.Main;
 import cn.xjiangwei.RobotHelper.R;
 import cn.xjiangwei.RobotHelper.Tools.MLog;
-import cn.xjiangwei.RobotHelper.Tools.ScreenCaptureUtil;
-
-import static android.os.SystemClock.sleep;
 
 
 public class RunTime extends Service {

@@ -2,7 +2,9 @@ package cn.xjiangwei.RobotHelper;
 
 import android.Manifest;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
@@ -14,6 +16,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.dfqin.grantor.PermissionListener;
@@ -24,12 +27,16 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 
 import java.io.File;
+import java.util.Random;
 
 import cn.xjiangwei.RobotHelper.Service.RunTime;
 import cn.xjiangwei.RobotHelper.Tools.MLog;
 import cn.xjiangwei.RobotHelper.Tools.ScreenCaptureUtilByMediaPro;
 import cn.xjiangwei.RobotHelper.Tools.TessactOcr;
 import cn.xjiangwei.RobotHelper.Tools.Toast;
+import cn.xjiangwei.RobotHelper.Xposed.AlipayBroadcast;
+import cn.xjiangwei.RobotHelper.broadcast.PluginBroadcast;
+import cn.xjiangwei.RobotHelper.utils.Constants;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private int mResultCode;
     private Intent mResultData;
     private MediaProjection mMediaProjection;
-
+    private PluginBroadcast pluginReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
             MainApplication.sceenWidth = Math.max(dm.heightPixels, dm.widthPixels);
             MainApplication.dpi = dm.densityDpi;
         }
+
+
+        pluginReceiver = new PluginBroadcast();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(pluginReceiver.INTENT_FILTER_ACTION);
+        registerReceiver(pluginReceiver, intentFilter);
 
 
         ScreenCaptureUtilByMediaPro.mProjectionManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
@@ -115,6 +128,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void shouqian(View view) {
+        Toast.show("收钱");
+        Intent intent = getPackageManager().getLaunchIntentForPackage(Constants.ALIPAY_PACKAGE);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        Intent broadCastIntent = new Intent();
+        Random random = new Random();
+        broadCastIntent.putExtra("qr_money", String.valueOf(random.nextInt(100) + 1));
+        broadCastIntent.putExtra("beiZhu", "测试");
+        broadCastIntent.setAction(AlipayBroadcast.INTENT_FILTER_ACTION);
+        sendBroadcast(broadCastIntent);
+    }
+
 
     @Override
     protected void onResume() {
@@ -124,8 +150,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void openLog(View view) {
-
-
         String filePath = Environment.getExternalStorageDirectory().toString() + "/RobotHelper.log";
         File file = new File(filePath);
         Uri fileURI = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".provider", file);
@@ -159,16 +183,40 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public void startFoundersc(View view) {
+        Intent intent = getPackageManager().getLaunchIntentForPackage("com.foundersc.app.xf");
+        if (intent != null) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    }
+
 
     private void updateStatus() {
         TextView xpStatus = (TextView) findViewById(R.id.xposed_status);
         TextView asStatus = (TextView) findViewById(R.id.accessibility_status);
         TextView hsStatus = (TextView) findViewById(R.id.httpserver_status);
 
+        Button start = findViewById(R.id.start);
+        Button open = findViewById(R.id.open);
+        Button shouqian = findViewById(R.id.shouqian);
+        Button startFoundersc = findViewById(R.id.startFoundersc);
+
+        start.setOnClickListener(this::start);
+        open.setOnClickListener(this::openLog);
+        shouqian.setOnClickListener(this::shouqian);
+        startFoundersc.setOnClickListener(this::startFoundersc);
+
         xpStatus.setText(mainApplication.checkXposedHook() ? "Xposed状态：已加载" : "Xposed状态：未加载");
         asStatus.setText(mainApplication.checkAccessibilityService() ? "Accessibility状态：已加载" : "Accessibility状态：未加载");
         hsStatus.setText(mainApplication.checkHttpServer() ? "HttpServer状态：已开启" : "HttpServer状态：未开启");
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(pluginReceiver);
+    }
 
 }

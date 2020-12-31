@@ -28,7 +28,7 @@ import static android.os.SystemClock.sleep;
  */
 public class RootInput implements Input {
 
-    private static RootInput instance;
+    private static volatile RootInput instance;
     private Process mProcess;
     private String sendeventPath;
     public static boolean NEED_ROOT = true;

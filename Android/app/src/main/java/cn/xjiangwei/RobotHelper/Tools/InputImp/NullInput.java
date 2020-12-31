@@ -6,7 +6,7 @@ import cn.xjiangwei.RobotHelper.Tools.Toast;
 
 public class NullInput implements Input {
 
-    private static NullInput instance;
+    private static volatile NullInput instance;
 
     public static NullInput getInstance() {
         if (instance == null) {

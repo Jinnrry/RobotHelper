@@ -76,8 +76,8 @@ public class FileUtils {
 
     private void copyAssetsToDst(Context context, String srcPath, String dstPath) {
         try {
-            String fileNames[] = context.getAssets().list(srcPath);
-            if (fileNames.length > 0) {
+            String[] fileNames = context.getAssets().list(srcPath);
+            if (fileNames != null && fileNames.length > 0) {
                 File file = new File(Environment.getExternalStorageDirectory(), dstPath);
                 if (!file.exists()) file.mkdirs();
                 for (String fileName : fileNames) {

@@ -20,6 +20,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <service
+            android:process=":runTime"
+            android:name=".Service.RunTime"
+            android:enabled="true"
+            android:exported="false"></service>
+        <service
             android:name=".Service.Accessibility"
             android:enabled="true"
             android:exported="true"
@@ -27,12 +32,13 @@
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
         </service>
         <service
-            android:name=".Service.RunTime"
+            android:name=".Service.Controller"
             android:enabled="true"
             android:exported="false" /> <!-- 是否是xposed模块，xposed根据这个来判断是否是模块 -->
         <meta-data
@@ -48,10 +54,10 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -60,7 +66,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

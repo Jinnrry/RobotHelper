@@ -32,7 +32,7 @@
                 android:resource="@xml/accessibility_service_config" />
         </service>
         <service
-            android:name=".Service.RunTime"
+            android:name=".Service.Controller"
             android:enabled="true"
             android:exported="false" /> <!-- 是否是xposed模块，xposed根据这个来判断是否是模块 -->
         <meta-data

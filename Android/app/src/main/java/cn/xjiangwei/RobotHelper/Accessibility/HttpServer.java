@@ -22,9 +22,26 @@ import fi.iki.elonen.NanoHTTPD;
 public class HttpServer extends NanoHTTPD {
 
 
-    public boolean runing;
+    private static volatile HttpServer instance;
+    private boolean runing = false;
 
-    public HttpServer() {
+    public static HttpServer getInstance() {
+        if (instance == null) {
+            synchronized (HttpServer.class) {
+                if (instance == null) {
+                    instance = new HttpServer();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public boolean isRuning() {
+        return runing;
+    }
+
+
+    private HttpServer() {
         super("0.0.0.0", 1082);
         try {
             start(5000, true);

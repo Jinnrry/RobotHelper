@@ -14,7 +14,7 @@ import cn.xjiangwei.RobotHelper.Tools.Toast;
 public class AccessibilityInput implements Input {
 
 
-    private static AccessibilityInput instance;
+    private static volatile AccessibilityInput instance;
 
     public static AccessibilityInput getInstance() {
         if (instance == null) {

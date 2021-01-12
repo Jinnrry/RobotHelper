@@ -11,7 +11,7 @@ import static android.os.SystemClock.sleep;
 
 public class InstrumentationInput implements Input {
 
-    private static InstrumentationInput instance;
+    private static volatile InstrumentationInput instance;
 
     public static InstrumentationInput getInstance() {
         if (instance == null) {

@@ -25,7 +25,7 @@ import org.opencv.android.OpenCVLoader;
 
 import java.io.File;
 
-import cn.xjiangwei.RobotHelper.Service.RunTime;
+import cn.xjiangwei.RobotHelper.Service.Controller;
 import cn.xjiangwei.RobotHelper.Tools.MLog;
 import cn.xjiangwei.RobotHelper.Tools.ScreenCaptureUtilByMediaPro;
 import cn.xjiangwei.RobotHelper.Tools.TessactOcr;
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         }
         // 启动屏幕监控
         ScreenCaptureUtilByMediaPro.init();
-        Intent intent = new Intent(this, RunTime.class);
+        Intent intent = new Intent(this, Controller.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent);
         } else {

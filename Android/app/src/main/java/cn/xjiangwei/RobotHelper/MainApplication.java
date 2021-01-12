@@ -2,8 +2,9 @@ package cn.xjiangwei.RobotHelper;
 
 import android.app.Application;
 
+import cn.xjiangwei.RobotHelper.Accessibility.HttpServer;
 import cn.xjiangwei.RobotHelper.Service.Accessibility;
-import cn.xjiangwei.RobotHelper.Service.RunTime;
+import cn.xjiangwei.RobotHelper.Service.Controller;
 
 
 public class MainApplication extends Application {
@@ -41,6 +42,6 @@ public class MainApplication extends Application {
     }
 
     public boolean checkHttpServer() {
-        return RunTime.httpServer != null && RunTime.httpServer.runing;
+        return HttpServer.getInstance().isRuning();
     }
 }

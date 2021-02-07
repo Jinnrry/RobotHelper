@@ -37,25 +37,30 @@ public class ScreenCaptureUtil {
      * @return
      */
     public static Bitmap getScreenCap() {
-        Bitmap bitmap;
-
-        if (ScreenCaptureUtil.screenOrientation == 0) {
-            if (MainApplication.getInstance().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                //竖屏
-                bitmap = Bitmap.createBitmap(ScreenCaptureUtilByMediaPro.getScreenCapVertical());
-
-            } else {
-                //横屏
-                bitmap = Bitmap.createBitmap(ScreenCaptureUtilByMediaPro.getScreenCapHorizontal());
+        Bitmap o_img;
+        boolean retry = false;
+        do {
+            if (retry) {
+                MLog.info("资源已被回收，尝试重试！");
             }
-        } else if (ScreenCaptureUtil.screenOrientation == 1) {
-            bitmap = Bitmap.createBitmap(ScreenCaptureUtilByMediaPro.getScreenCapVertical());
-        } else {
-            bitmap = Bitmap.createBitmap(ScreenCaptureUtilByMediaPro.getScreenCapHorizontal());
-        }
+            if (ScreenCaptureUtil.screenOrientation == 0) {
+                if (MainApplication.getInstance().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    //竖屏
+                    o_img = ScreenCaptureUtilByMediaPro.getScreenCapVertical();
+                } else {
+                    //横屏
+                    o_img = ScreenCaptureUtilByMediaPro.getScreenCapHorizontal();
+                }
+            } else if (ScreenCaptureUtil.screenOrientation == 1) {
+                o_img = ScreenCaptureUtilByMediaPro.getScreenCapVertical();
+            } else {
+                o_img = ScreenCaptureUtilByMediaPro.getScreenCapHorizontal();
+            }
+            retry = true;
+        } while (o_img == null || o_img.isRecycled());
 
 
-        return bitmap;
+        return Bitmap.createBitmap(o_img);
 
 
 //         使用adb方式截图，性能低下，已废弃

@@ -1,0 +1,1960 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tesseract</name>
+    </assembly>
+    <members>
+        <member name="T:Tesseract.AggregateResultRenderer">
+            <summary>
+            Aggregate result renderer.
+            </summary>
+        </member>
+        <member name="T:Tesseract.AggregateResultRenderer.EndDocumentOnDispose">
+            <summary>
+            Ensures the renderer's EndDocument when disposed off.
+            </summary>
+        </member>
+        <member name="M:Tesseract.AggregateResultRenderer.#ctor(Tesseract.IResultRenderer[])">
+            <summary>
+            Create a new aggregate result renderer with the specified child result renderers.
+            </summary>
+            <param name="resultRenderers">The child result renderers.</param>
+        </member>
+        <member name="M:Tesseract.AggregateResultRenderer.#ctor(System.Collections.Generic.IEnumerable{Tesseract.IResultRenderer})">
+            <summary>
+            Create a new aggregate result renderer with the specified child result renderers.
+            </summary>
+            <param name="resultRenderers">The child result renderers.</param>
+        </member>
+        <member name="P:Tesseract.AggregateResultRenderer.PageNumber">
+            <summary>
+            Get's the current page number.
+            </summary>
+        </member>
+        <member name="P:Tesseract.AggregateResultRenderer.ResultRenderers">
+            <summary>
+            Get's the child result renderers.
+            </summary>
+        </member>
+        <member name="M:Tesseract.AggregateResultRenderer.AddPage(Tesseract.Page)">
+            <summary>
+            Adds a page to each of the child result renderers.
+            </summary>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.AggregateResultRenderer.BeginDocument(System.String)">
+            <summary>
+            Begins a new document with the specified title.
+            </summary>
+            <param name="title">The title of the document.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Tesseract.BitmapHelper">
+            <summary>
+            Description of BitmapHelper.
+            </summary>
+        </member>
+        <member name="T:Tesseract.ChoiceIterator">
+            <summary>
+            Class to iterate over the classifier choices for a single symbol.
+            </summary>
+        </member>
+        <member name="M:Tesseract.ChoiceIterator.Next">
+            <summary>
+            Moves to the next choice for the symbol and returns false if there are none left.
+            </summary>
+            <returns>true|false</returns>
+        </member>
+        <member name="M:Tesseract.ChoiceIterator.GetConfidence">
+            <summary>
+            Returns the confidence of the current choice.        
+            </summary>
+            <remarks>
+            The number should be interpreted as a percent probability. (0.0f-100.0f)
+            </remarks>
+            <returns>float</returns>
+        </member>
+        <member name="M:Tesseract.ChoiceIterator.GetText">
+            <summary>
+            Returns the text string for the current choice.
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="T:Tesseract.ElementProperties">
+            <summary>
+            Represents properties that describe a text block's orientation.
+            </summary>
+        </member>
+        <member name="P:Tesseract.ElementProperties.Orientation">
+            <summary>
+            Gets the <see cref="P:Tesseract.ElementProperties.Orientation" /> for corresponding text block.
+            </summary>
+        </member>
+        <member name="P:Tesseract.ElementProperties.TextLineOrder">
+            <summary>
+            Gets the <see cref="P:Tesseract.ElementProperties.TextLineOrder" /> for corresponding text block.
+            </summary>
+        </member>
+        <member name="P:Tesseract.ElementProperties.WritingDirection">
+            <summary>
+            Gets the <see cref="P:Tesseract.ElementProperties.WritingDirection" /> for corresponding text block.
+            </summary>
+        </member>
+        <member name="P:Tesseract.ElementProperties.DeskewAngle">
+            <summary>
+            Gets the angle the page would need to be rotated to deskew the text block.
+            </summary>
+        </member>
+        <member name="F:Tesseract.EngineMode.TesseractOnly">
+            <summary>
+            Only the legacy tesseract OCR engine is used.
+            </summary>
+        </member>
+        <member name="F:Tesseract.EngineMode.LstmOnly">
+            <summary>
+            Only the new LSTM-based OCR engine is used.
+            </summary>
+        </member>
+        <member name="F:Tesseract.EngineMode.TesseractAndLstm">
+            <summary>
+            Both the legacy and new LSTM based OCR engine is used.
+            </summary>
+        </member>
+        <member name="F:Tesseract.EngineMode.Default">
+            <summary>
+            The default OCR engine is used (currently LSTM-ased OCR engine).
+            </summary>
+        </member>
+        <member name="M:Tesseract.Internal.Guard.Require(System.String,System.Boolean)">
+            <summary>
+            Ensures the given <paramref name="condition"/> is true.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="condition"/> is not true.</exception>
+            <param name="paramName">The name of the parameter, used when generating the exception.</param>
+            <param name="condition">The value of the parameter to check.</param>
+        </member>
+        <member name="M:Tesseract.Internal.Guard.Require(System.String,System.Boolean,System.String)">
+            <summary>
+            Ensures the given <paramref name="condition"/> is true.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="condition"/> is not true.</exception>
+            <param name="paramName">The name of the parameter, used when generating the exception.</param>
+            <param name="condition">The value of the parameter to check.</param>
+            <param name="message">The error message.</param>
+        </member>
+        <member name="M:Tesseract.Internal.Guard.Require(System.String,System.Boolean,System.String,System.Object[])">
+            <summary>
+            Ensures the given <paramref name="condition"/> is true.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="condition"/> is not true.</exception>
+            <param name="paramName">The name of the parameter, used when generating the exception.</param>
+            <param name="condition">The value of the parameter to check.</param>
+            <param name="message">The error message.</param>
+            <param name="args">The message argument used to format <paramref name="message" />.</param>
+        </member>
+        <member name="M:Tesseract.Internal.Guard.RequireNotNullOrEmpty(System.String,System.String)">
+            <summary>
+            Ensures the given <paramref name="value"/> is not null or empty.
+            </summary>
+            <exception cref="T:System.ArgumentException">The <paramref name="value"/> is null or empty.</exception>
+            <param name="paramName">The name of the parameter, used when generating the exception.</param>
+            <param name="value">The value of the parameter to check.</param>
+        </member>
+        <member name="M:Tesseract.Internal.Guard.Verify(System.Boolean,System.String,System.Object[])">
+            <summary>
+            Verifies the given <paramref name="condition"/> is <c>True</c>; throwing an <see cref="T:System.InvalidOperationException"/> when the condition is not met.
+            </summary>
+            <param name="condition">The condition to be tested.</param>
+            <param name="message">The error message to raise if <paramref name="condition"/> is <c>False</c>.</param>
+            <param name="args">Optional formatting arguments.</param>
+        </member>
+        <member name="T:Tesseract.Internal.TessConvert">
+            <summary>
+            Utility helpers to handle converting variable values.
+            </summary>
+        </member>
+        <member name="T:Tesseract.Interop.ITessApiSignatures">
+            <summary>
+            The exported tesseract api signatures.
+            </summary>
+            <remarks>
+            Please note this is only public for technical reasons (you can't proxy a internal interface).
+            It should be considered an internal interface and is NOT part of the public api and may have
+            breaking changes between releases.
+            </remarks>
+        </member>
+        <member name="M:Tesseract.Interop.ITessApiSignatures.BaseApiCreate">
+            <summary>
+            Creates a new BaseAPI instance
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Interop.ITessApiSignatures.BaseApiDelete(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Deletes a base api instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Interop.ITessApiSignatures.ResultIteratorGetChoiceIterator(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Native API call to TessResultIteratorGetChoiceIterator
+            </summary>
+            <param name="handle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Interop.ITessApiSignatures.ChoiceIteratorDelete(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Native API call to TessChoiceIteratorDelete
+            </summary>
+            <param name="handle"></param>
+        </member>
+        <member name="M:Tesseract.Interop.ITessApiSignatures.ChoiceIteratorNext(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Native API call to TessChoiceIteratorNext
+            </summary>
+            <param name="handle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Interop.ITessApiSignatures.ChoiceIteratorGetUTF8TextInternal(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Native API call to TessChoiceIteratorGetUTF8Text
+            </summary>
+            <param name="handle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Interop.ITessApiSignatures.ChoiceIteratorGetConfidence(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Native API call to TessChoiceIteratorConfidence
+            </summary>
+            <param name="handle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Interop.TessApi.ChoiceIteratorGetUTF8Text(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Returns the null terminated UTF-8 encoded text string for the current choice
+            </summary>
+            <remarks>
+            NOTE: Unlike LTRResultIterator::GetUTF8Text, the return points to an
+            internal structure and should NOT be delete[]ed to free after use.
+            </remarks>
+            <param name="choiceIteratorHandle"></param>
+            <returns>string</returns>
+        </member>
+        <member name="T:Tesseract.Interop.Constants">
+            <summary>
+            Description of Constants.
+            </summary>
+        </member>
+        <member name="T:Tesseract.Interop.HostProcessInfo">
+            <summary>
+            Provides information about the hosting process.
+            </summary>
+        </member>
+        <member name="T:Tesseract.Interop.ILeptonicaApiSignatures">
+            <summary>
+            The exported leptonica api signatures.
+            </summary>
+            <remarks>
+            Please note this is only public for technical reasons (you can't proxy a internal interface).
+            It should be considered an internal interface and is NOT part of the public api and may have 
+            breaking changes between releases.
+            </remarks>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapCreate(System.Int32)">
+            <summary>
+            Creates a new colormap with the specified <paramref name="depth"/>.
+            </summary>
+            <param name="depth">The depth of the pix in bpp, can be 2, 4, or 8</param>
+            <returns>The pointer to the color map, or null on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapCreateRandom(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new colormap of the specified <paramref name="depth"/> with random colors where the first color can optionally be set to black, and the last optionally set to white.
+            </summary>
+            <param name="depth">The depth of the pix in bpp, can be 2, 4, or 8</param>
+            <param name="hasBlack">If set to 1 the first color will be black.</param>
+            <param name="hasWhite">If set to 1 the last color will be white.</param>
+            <returns>The pointer to the color map, or null on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapCreateLinear(System.Int32,System.Int32)">
+            <summary>
+            Creates a new colormap of the specified <paramref name="depth"/> with equally spaced gray color values. 
+            </summary>
+            <param name="depth">The depth of the pix in bpp, can be 2, 4, or 8</param>
+            <param name="levels">The number of levels (must be between 2 and 2^<paramref name="depth"/></param>
+            <returns>The pointer to the colormap, or null on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapCopy(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Performs a deep copy of the color map.
+            </summary>
+            <param name="cmaps">The pointer to the colormap instance.</param>
+            <returns>The pointer to the colormap, or null on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapDestroy(System.IntPtr@)">
+            <summary>
+            Destorys and cleans up any memory used by the color map.
+            </summary>
+            <param name="cmap">The pointer to the colormap instance, set to null on success.</param>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapGetCount(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Gets the number of color entries in the color map.
+            </summary>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <returns>Returns the number of color entries in the color map, or 0 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapGetFreeCount(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Gets the number of free color entries in the color map.
+            </summary>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <returns>Returns the number of free color entries in the color map, or 0 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapGetDepth(System.Runtime.InteropServices.HandleRef)">
+            <returns>Returns color maps depth, or 0 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapGetMinDepth(System.Runtime.InteropServices.HandleRef,System.Int32@)">
+            <summary>
+            Gets the minimum pix depth required to support the color map.
+            </summary>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <param name="minDepth">Returns the minimum depth to support the colormap</param>
+            <returns>Returns 0 if OK, 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapClear(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Removes all colors from the color map by setting the count to zero.
+            </summary>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <returns>Returns 0 if OK, 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapAddColor(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Adds the color to the pix color map if their is room.
+            </summary>
+            <returns>Returns 0 if OK, 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapAddNewColor(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Adds the specified color if it doesn't already exist, returning the colors index in the data array.
+            </summary>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <param name="redValue">The red value</param>
+            <param name="greenValue">The green value</param>
+            <param name="blueValue">The blue value</param>
+            <param name="colorIndex">The index of the new color if it was added, or the existing color if it already existed.</param>
+            <returns>Returns 0 for success, 1 for error, 2 for not enough space.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapAddNearestColor(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Adds the specified color if it doesn't already exist, returning the color's index in the data array.
+            </summary>
+            <remarks>
+            If the color doesn't exist and there is not enough room to add a new color return the nearest color.
+            </remarks>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <param name="redValue">The red value</param>
+            <param name="greenValue">The green value</param>
+            <param name="blueValue">The blue value</param>
+            <param name="colorIndex">The index of the new color if it was added, or the existing color if it already existed.</param>
+            <returns>Returns 0 for success, 1 for error, 2 for not enough space.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapUsableColor(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Checks if the color already exists or if their is enough room to add it.
+            </summary>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <param name="redValue">The red value</param>
+            <param name="greenValue">The green value</param>
+            <param name="blueValue">The blue value</param>
+            <param name="usable">Returns 1 if usable; 0 if not.</param>
+            <returns>Returns 0 if OK, 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapAddBlackOrWhite(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32@)">
+            <summary>
+            Adds a color (black\white) if not already there returning it's index through <paramref name="index"/>.
+            </summary>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <param name="color">The color to add (0 for black; 1 for white)</param>
+            <param name="index">The index of the color.</param>
+            <returns>Returns 0 if OK; 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapSetBlackAndWhite(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32)">
+            <summary>
+            Sets the darkest color in the colormap to black, if <paramref name="setBlack"/> is 1. 
+            Sets the lightest color in the colormap to white if <paramref name="setWhite"/> is 1. 
+            </summary>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <param name="setBlack">0 for no operation; 1 to set darket color to black</param>
+            <param name="setWhite">0 for no operation; 1 to set lightest color to white</param>
+            <returns>Returns 0 if OK; 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapGetColor(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            Gets the color at the specified index.
+            </summary>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <param name="index">The index of the color entry.</param>
+            <param name="redValue">The color entry's red value.</param>
+            <param name="blueValue">The color entry's blue value.</param>
+            <param name="greenValue">The color entry's green value.</param>
+            <returns>Returns 0 if OK; 1 if not accessable (caller should check).</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapGetColor32(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32@)">
+            <summary>
+            Gets the color at the specified index.
+            </summary>
+            <remarks>
+            The alpha channel will always be zero as it is not used in Leptonica color maps.
+            </remarks>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <param name="index">The index of the color entry.</param>
+            <param name="color">The color entry as 32 bit value</param>
+            <returns>Returns 0 if OK; 1 if not accessable (caller should check).</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapResetColor(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets a previously allocated color entry.
+            </summary>
+            <param name="cmap">The pointer to the colormap instance.</param>
+            <param name="index">The index of the colormap entry</param>
+            <param name="redValue"></param>
+            <param name="blueValue"></param>
+            <param name="greenValue"></param>
+            <returns>Returns 0 if OK; 1 if not accessable (caller should check).</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapGetIndex(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Gets the index of the color entry with the specified color, return 0 if found; 1 if not.
+            </summary>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapHasColor(System.Runtime.InteropServices.HandleRef,System.Int32)">
+            <summary>
+            Returns 0 if the color exists in the color map; otherwise 1.
+            </summary>
+            <returns>Returns 0 if OK; 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapCountGrayColors(System.Runtime.InteropServices.HandleRef,System.Int32@)">
+            <summary>
+            Returns the number of unique grey colors including black and white.
+            </summary>
+            <returns>Returns 0 if OK; 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapGetRankIntensity(System.Runtime.InteropServices.HandleRef,System.Single,System.Int32@)">
+            <summary>
+            Finds the index of the color entry with the rank intensity.
+            </summary>
+            <returns>Returns 0 if OK; 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapGetNearestIndex(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Finds the index of the color entry closest to the specified color.
+            </summary>
+            <returns>Returns 0 if OK; 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.ILeptonicaApiSignatures.pixcmapGetNearestGrayIndex(System.Runtime.InteropServices.HandleRef,System.Int32,System.Int32@)">
+            <summary>
+            Finds the index of the color entry closest to the specified color.
+            </summary>
+            <remarks>
+            Should only be used on gray colormaps.
+            </remarks>
+            <returns>Returns 0 if OK; 1 on error.</returns>
+        </member>
+        <member name="M:Tesseract.Interop.MarshalHelper.StrLength(System.IntPtr)">
+            <summary>
+            Gets the number of bytes in a null terminated byte array.
+            </summary>
+        </member>
+        <member name="M:Tesseract.IResultRenderer.BeginDocument(System.String)">
+            <summary>
+            Begins a new document with the specified <paramref name="title"/>.
+            </summary>
+            <param name="title">The title of the new document.</param>
+            <returns>A handle that when disposed of ends the current document.</returns>
+        </member>
+        <member name="M:Tesseract.IResultRenderer.AddPage(Tesseract.Page)">
+            <summary>
+            Add the page to the current document.
+            </summary>
+            <param name="page"></param>
+            <returns><c>True</c> if the page was successfully added to the result renderer; otherwise false.</returns>
+        </member>
+        <member name="P:Tesseract.IResultRenderer.PageNumber">
+            <summary>
+            Gets the current page number; returning -1 if no page has yet been added otherwise the number
+            of the last added page (starting from 0).
+            </summary>
+        </member>
+        <member name="M:Tesseract.MathHelper.ToRadians(System.Single)">
+            <summary>
+            Convert a degrees to radians.
+            </summary>
+            <param name="angleInDegrees"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.MathHelper.ToRadians(System.Double)">
+            <summary>
+            Convert a degrees to radians.
+            </summary>
+            <param name="angleInDegrees"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.MathHelper.DivRoundUp(System.Int32,System.Int32)">
+            <summary>
+            Calculates the smallest integer greater than the quotant of dividend and divisor.
+            </summary>
+            <see href="http://stackoverflow.com/questions/921180/how-can-i-ensure-that-a-division-of-integers-is-always-rounded-up"/>
+        </member>
+        <member name="T:Tesseract.Orientation">
+            <summary>
+            Represents orientation that the page would need to be rotated so that .
+            </summary>
+            <remarks>
+            Orientation is defined as to what side of the page would need to correspond to the 'up' direction such that the characters will
+            be read able. Another way of looking at this what direction you need to rotate you head so that "up" aligns with Orientation, 
+            then the characters will appear "right side up" and readable.
+            
+            In short:
+            <list type="bullet">
+            	<item>PageUp - Page is correctly alligned with up and no rotation is needed.</item>
+            	<item>PageRight - Page needs to be rotated so the right hand side is up, 90 degress counter clockwise, to be readable.</item>
+            	<item>PageDown - Page needs to be rotated so the bottom side is up, 180 degress counter clockwise, to be readable.</item>
+            	<item>PageLeft - Page needs to be rotated so the left hand side is up, 90 degress clockwise, to be readable.</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:Tesseract.Orientation.PageUp">
+            <summary>
+            Page is correctly alligned with up and no rotation is needed.
+            </summary>
+        </member>
+        <member name="F:Tesseract.Orientation.PageRight">
+            <summary>
+            Page needs to be rotated so the right hand side is up, 90 degress counter clockwise, to be readable.
+            </summary>
+        </member>
+        <member name="F:Tesseract.Orientation.PageDown">
+            <summary>
+            Page needs to be rotated so the bottom side is up, 180 degress counter clockwise, to be readable.
+            </summary>
+        </member>
+        <member name="F:Tesseract.Orientation.PageLeft">
+            <summary>
+            Page needs to be rotated so the left hand side is up, 90 degress clockwise, to be readable.
+            </summary>
+        </member>
+        <member name="P:Tesseract.Page.Image">
+            <summary>
+            Gets the <see cref="T:Tesseract.Pix"/> that is being ocr'd.
+            </summary>
+        </member>
+        <member name="P:Tesseract.Page.ImageName">
+            <summary>
+            Gets the name of the image being ocr'd.
+            </summary>
+            <remarks>
+            This is also used for some of the more advanced functionality such as identifying the associated UZN file if present.
+            </remarks>
+        </member>
+        <member name="P:Tesseract.Page.PageSegmentMode">
+            <summary>
+            Gets the page segmentation mode used to OCR the specified image.
+            </summary>
+        </member>
+        <member name="P:Tesseract.Page.RegionOfInterest">
+            <summary>
+            The current region of interest being parsed.
+            </summary>
+        </member>
+        <member name="M:Tesseract.Page.GetThresholdedImage">
+            <summary>
+            Gets the thresholded image that was OCR'd.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Page.AnalyseLayout">
+            <summary>
+            Creates a <see cref="T:Tesseract.PageIterator"/> object that is used to iterate over the page's layout as defined by the current <see cref="P:Tesseract.Page.RegionOfInterest"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Page.GetIterator">
+            <summary>
+            Creates a <see cref="T:Tesseract.ResultIterator"/> object that is used to iterate over the page as defined by the current <see cref="P:Tesseract.Page.RegionOfInterest"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Page.GetText">
+            <summary>
+            Gets the page's content as plain text.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Page.GetHOCRText(System.Int32,System.Boolean)">
+            <summary>
+            Gets the page's content as an HOCR text.
+            </summary>
+            <param name="pageNum">The page number (zero based).</param>
+            <param name="useXHtml">True to use XHTML Output, False to HTML Output</param>
+            <returns>The OCR'd output as an HOCR text string.</returns>
+        </member>
+        <member name="M:Tesseract.Page.GetAltoText(System.Int32)">
+            <summary>
+            Gets the page's content as an Alto text.
+            </summary>
+            <param name="pageNum">The page number (zero based).</param>
+            <returns>The OCR'd output as an Alto text string.</returns>
+        </member>
+        <member name="M:Tesseract.Page.GetTsvText(System.Int32)">
+            <summary>
+            Gets the page's content as a Tsv text.
+            </summary>
+            <param name="pageNum">The page number (zero based).</param>
+            <returns>The OCR'd output as a Tsv text string.</returns>
+        </member>
+        <member name="M:Tesseract.Page.GetBoxText(System.Int32)">
+            <summary>
+            Gets the page's content as a Box text.
+            </summary>
+            <param name="pageNum">The page number (zero based).</param>
+            <returns>The OCR'd output as a Box text string.</returns>
+        </member>
+        <member name="M:Tesseract.Page.GetLSTMBoxText(System.Int32)">
+            <summary>
+            Gets the page's content as a LSTMBox text.
+            </summary>
+            <param name="pageNum">The page number (zero based).</param>
+            <returns>The OCR'd output as a LSTMBox text string.</returns>
+        </member>
+        <member name="M:Tesseract.Page.GetWordStrBoxText(System.Int32)">
+            <summary>
+            Gets the page's content as a WordStrBox text.
+            </summary>
+            <param name="pageNum">The page number (zero based).</param>
+            <returns>The OCR'd output as a WordStrBox text string.</returns>
+        </member>
+        <member name="M:Tesseract.Page.GetUNLVText">
+            <summary>
+            Gets the page's content as an UNLV text.
+            </summary>
+            <param name="pageNum">The page number (zero based).</param>
+            <returns>The OCR'd output as an UNLV text string.</returns>
+        </member>
+        <member name="M:Tesseract.Page.GetMeanConfidence">
+            <summary>
+            Get's the mean confidence that as a percentage of the recognized text.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Page.GetSegmentedRegions(Tesseract.PageIteratorLevel)">
+            <summary>
+            Get segmented regions at specified page iterator level.
+            </summary>
+            <param name="pageIteratorLevel">PageIteratorLevel enum</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Page.DetectBestOrientation(Tesseract.Orientation@,System.Single@)">
+            <summary>
+            Detects the page orientation, with corresponding confidence when using <see cref="F:Tesseract.PageSegMode.OsdOnly"/>.
+            </summary>
+            <remarks>
+            If using full page segmentation mode (i.e. AutoOsd) then consider using <see cref="M:Tesseract.Page.AnalyseLayout"/> instead as this also provides a
+            deskew angle which isn't available when just performing orientation detection.
+            </remarks>
+            <param name="orientation">The page orientation.</param>
+            <param name="confidence">The confidence level of the orientation (15 is reasonably confident).</param>
+            
+        </member>
+        <member name="M:Tesseract.Page.DetectBestOrientation(System.Int32@,System.Single@)">
+            <summary>
+            Detects the page orientation, with corresponding confidence when using <see cref="F:Tesseract.PageSegMode.OsdOnly"/>.
+            </summary>
+            <remarks>
+            If using full page segmentation mode (i.e. AutoOsd) then consider using <see cref="M:Tesseract.Page.AnalyseLayout"/> instead as this also provides a
+            deskew angle which isn't available when just performing orientation detection.
+            </remarks>
+            <param name="orientation">The detected clockwise page rotation in degrees (0, 90, 180, or 270).</param>
+            <param name="confidence">The confidence level of the orientation (15 is reasonably confident).</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Tesseract.Page.DetectBestOrientationAndScript(System.Int32@,System.Single@,System.String@,System.Single@)" -->
+        <member name="T:Tesseract.PageIterator">
+            <summary>
+            Represents an object that can iterate over tesseract's page structure.
+            </summary>
+            <remarks>
+            The iterator points to tesseract's internal page structure and is only valid while the Engine instance that created it exists
+            and has not been subjected to a call to Recognize since the iterator was created.
+            </remarks>
+        </member>
+        <member name="M:Tesseract.PageIterator.Begin">
+            <summary>
+            Moves the iterator to the start of the page.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PageIterator.Next(Tesseract.PageIteratorLevel)">
+            <summary>
+            Moves to the start of the next element at the given level.
+            </summary>
+            <remarks>
+            
+            </remarks>
+            <param name="level"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.PageIterator.Next(Tesseract.PageIteratorLevel,Tesseract.PageIteratorLevel)">
+            <summary>
+            Moves the iterator to the next <paramref name="element"/> iff the iterator is not currently pointing to the last <paramref name="element"/> in the specified <paramref name="level"/> (i.e. the last word in the paragraph).
+            </summary>
+            <param name="level">The iterator level.</param>
+            <param name="element">The page level.</param>
+            <returns><c>True</c> iff there is another <paramref name="element"/> to advance too and the current element is not the last element at the given level; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Tesseract.PageIterator.IsAtBeginningOf(Tesseract.PageIteratorLevel)">
+            <summary>
+            Returns <c>True</c> if the iterator is at the first element at the given level.
+            </summary>
+            <remarks>
+            A possible use is to determin if a call to next(word) moved to the start of a new paragraph.
+            </remarks>
+            <param name="level"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.PageIterator.IsAtFinalOf(Tesseract.PageIteratorLevel,Tesseract.PageIteratorLevel)">
+            <summary>
+            Returns <c>True</c> if the iterator is positioned at the last element at the given level.
+            </summary>
+            <param name="level"></param>
+            <param name="element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.PageIterator.TryGetBoundingBox(Tesseract.PageIteratorLevel,Tesseract.Rect@)">
+            <summary>
+            Gets the bounding rectangle of the current element at the given level. 
+            </summary>
+            <param name="level"></param>
+            <param name="bounds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.PageIterator.TryGetBaseline(Tesseract.PageIteratorLevel,Tesseract.Rect@)">
+            <summary>
+            Gets the baseline of the current element at the given level.
+            </summary>
+            <remarks>
+            The baseline is the line that passes through (x1, y1) and (x2, y2).
+            WARNING: with vertical text, baselines may be vertical! Returns false if there is no baseline at the current position.</remarks>
+            <param name="level"></param>
+            <param name="bounds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.PageIterator.GetProperties">
+            <summary>
+            Gets the element orientation information that the iterator currently points too.
+            </summary>
+        </member>
+        <member name="T:Tesseract.PageSegMode">
+            <summary>
+            Represents the possible page layou analysis modes.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.OsdOnly">
+            <summary>
+            Orientation and script detection (OSD) only.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.AutoOsd">
+            <summary>
+            Automatic page sementation with orientantion and script detection (OSD).
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.AutoOnly">
+            <summary>
+            Automatic page segmentation, but no OSD, or OCR.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.Auto">
+            <summary>
+            Fully automatic page segmentation, but no OSD.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.SingleColumn">
+            <summary>
+            Assume a single column of text of variable sizes.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.SingleBlockVertText">
+            <summary>
+            Assume a single uniform block of vertically aligned text.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.SingleBlock">
+            <summary>
+            Assume a single uniform block of text.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.SingleLine">
+            <summary>
+            Treat the image as a single text line.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.SingleWord">
+            <summary>
+            Treat the image as a single word.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.CircleWord">
+            <summary>
+            Treat the image as a single word in a circle.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.SingleChar">
+            <summary>
+            Treat the image as a single character.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Tesseract.PageSegMode.SparseText" -->
+        <member name="F:Tesseract.PageSegMode.SparseTextOsd">
+            <summary>
+            Sparse text with orientation and script detection.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.RawLine">
+            <summary>
+            Treat the image as a single text line, bypassing hacks that are
+            specific to Tesseract.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PageSegMode.Count">
+            <summary>        
+            Number of enum entries.
+            </summary>
+        </member>
+        <member name="F:Tesseract.Pix.VerySmallAngle">
+            <summary>
+            A small angle, in radians, for threshold checking. Equal to about 0.06 degrees.
+            </summary>
+        </member>
+        <member name="F:Tesseract.Pix.imageFomatLookup">
+            <summary>
+            Used to lookup image formats by extension.
+            </summary>
+        </member>
+        <member name="M:Tesseract.Pix.#ctor(System.IntPtr)">
+            <summary>
+            Creates a new pix instance using an existing handle to a pix structure.
+            </summary>
+            <remarks>
+            Note that the resulting instance takes ownership of the data structure.
+            </remarks>
+            <param name="handle"></param>
+        </member>
+        <member name="M:Tesseract.Pix.Save(System.String,System.Nullable{Tesseract.ImageFormat})">
+            <summary>
+            Saves the image to the specified file.
+            </summary>
+            <param name="filename">The path to the file.</param>
+            <param name="format">The format to use when saving the image, if not specified the file extension is used to guess the format.</param>
+        </member>
+        <member name="M:Tesseract.Pix.Clone">
+             <summary>
+             Increments this pix's reference count and returns a reference to the same pix data.
+             </summary>
+             <remarks>
+             A "clone" is simply a reference to an existing pix. It is implemented this way because
+             image can be large and hence expensive to copy and extra handles need to be made with a simple
+             policy to avoid double frees and memory leaks.
+            
+             The general usage protocol is:
+             <list type="number">
+             	<item>Whenever you want a new reference to an existing <see cref="T:Tesseract.Pix" /> call <see cref="M:Tesseract.Pix.Clone" />.</item>
+                 <item>
+             		Always call <see cref="M:Tesseract.Pix.Dispose(System.Boolean)" /> on all references. This decrements the reference count and
+             		will destroy the pix when the reference count reaches zero.
+             	</item>
+             </list>
+             </remarks>
+             <returns>The pix with it's reference count incremented.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.BinarizeOtsuAdaptiveThreshold(System.Int32,System.Int32,System.Int32,System.Int32,System.Single)">
+            <summary>
+            Binarization of the input image based on the passed parameters and the Otsu method
+            </summary>
+            <param name="sx"> sizeX Desired tile X dimension; actual size may vary.</param>
+            <param name="sy"> sizeY Desired tile Y dimension; actual size may vary.</param>
+            <param name="smoothx"> smoothX Half-width of convolution kernel applied to threshold array: use 0 for no smoothing.</param>
+            <param name="smoothy"> smoothY Half-height of convolution kernel applied to threshold array: use 0 for no smoothing.</param>
+            <param name="scorefract"> scoreFraction Fraction of the max Otsu score; typ. 0.1 (use 0.0 for standard Otsu).</param>
+            <returns>The binarized image.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.BinarizeSauvola(System.Int32,System.Single,System.Boolean)">
+             <summary>
+             Binarization of the input image using the Sauvola local thresholding method.
+            
+             Note: The source image must be 8 bpp grayscale; not colormapped.
+             </summary>
+             <remarks>
+             <list type="number">
+                 <listheader>Notes</listheader>
+                 <item>The window width and height are 2 * <paramref name="whsize"/> + 1. The minimum value for <paramref name="whsize"/> is 2; typically it is >= 7.</item>
+                 <item>The local statistics, measured over the window, are the average and standard deviation.</item>
+                 <item>
+                 The measurements of the mean and standard deviation are performed inside a border of (<paramref name="whsize"/> + 1) pixels.
+                 If source pix does not have these added border pixels, use <paramref name="addborder"/> = <c>True</c> to add it here; otherwise use
+                 <paramref name="addborder"/> = <c>False</c>.
+                 </item>
+                 <item>
+                 The Sauvola threshold is determined from the formula:  t = m * (1 - k * (1 - s / 128)) where t = local threshold, m = local mean,
+                 k = <paramref name="factor"/>, and s = local standard deviation which is maximised at 127.5 when half the samples are 0 and the other
+                 half are 255.
+                 </item>
+                 <item>
+                 The basic idea of Niblack and Sauvola binarization is that the local threshold should be less than the median value,
+                 and the larger the variance, the closer to the median it should be chosen. Typical values for k are between 0.2 and 0.5.
+                 </item>
+             </list>
+             </remarks>
+             <param name="whsize">the window half-width for measuring local statistics.</param>
+             <param name="factor">The factor for reducing threshold due to variances greater than or equal to zero (0). Typically around 0.35.</param>
+             <param name="addborder">If <c>True</c> add a border of width (<paramref name="whsize"/> + 1) on all sides.</param>
+             <returns>The binarized image.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.BinarizeSauvolaTiled(System.Int32,System.Single,System.Int32,System.Int32)">
+             <summary>
+             Binarization of the input image using the Sauvola local thresholding method on tiles
+             of the source image.
+            
+             Note: The source image must be 8 bpp grayscale; not colormapped.
+             </summary>
+             <remarks>
+             A tiled version of Sauvola can become neccisary for large source images (over 16M pixels) because:
+            
+             * The mean value accumulator is a uint32, overflow can occur for an image with more than 16M pixels.
+             * The mean value accumulator array for 16M pixels is 64 MB. While the mean square accumulator array for 16M pixels is 128 MB.
+               Using tiles reduces the size of these arrays.
+             * Each tile can be processed independently, in parallel, on a multicore processor.
+             </remarks>
+             <param name="whsize">The window half-width for measuring local statistics</param>
+             <param name="factor">The factor for reducing threshold due to variances greater than or equal to zero (0). Typically around 0.35.</param>
+             <param name="nx">The number of tiles to subdivide the source image into on the x-axis.</param>
+             <param name="ny">The number of tiles to subdivide the source image into on the y-axis.</param>
+             <returns>THe binarized image.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.ConvertRGBToGray(System.Single,System.Single,System.Single)">
+            <summary>
+            Conversion from RBG to 8bpp grayscale using the specified weights. Note red, green, blue weights should add up to 1.0.
+            </summary>
+            <param name="rwt">Red weight</param>
+            <param name="gwt">Green weight</param>
+            <param name="bwt">Blue weight</param>
+            <returns>The Grayscale pix.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.ConvertRGBToGray">
+            <summary>
+            Conversion from RBG to 8bpp grayscale.
+            </summary>
+            <returns>The Grayscale pix.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.RemoveLines">
+            <summary>
+            Removes horizontal lines from a grayscale image. 
+            The algorithm is based on Leptonica <code>lineremoval.c</code> example.
+            See <a href="http://www.leptonica.com/line-removal.html">line-removal</a>.
+            </summary>
+            <returns>image with lines removed</returns>
+        </member>
+        <member name="F:Tesseract.Pix.SEL_STR2">
+            <summary>
+            HMT (with just misses) for speckle up to 2x2
+            "oooo"
+            "oC o"
+            "o  o"
+            "oooo"
+            </summary>
+        </member>
+        <member name="F:Tesseract.Pix.SEL_STR3">
+            <summary>
+            HMT (with just misses) for speckle up to 3x3
+            "oC  o"
+            "o   o"
+            "o   o"
+            "ooooo"
+            </summary>
+        </member>
+        <member name="M:Tesseract.Pix.Despeckle(System.String,System.Int32)">
+            <summary>
+            Reduces speckle noise in image. The algorithm is based on Leptonica
+            <code>speckle_reg.c</code> example demonstrating morphological method of
+            removing speckle.
+            </summary>
+            <param name="selStr">hit-miss sels in 2D layout; SEL_STR2 and SEL_STR3 are predefined values</param>
+            <param name="selSize">2 for 2x2, 3 for 3x3</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.Pix.Deskew">
+            <summary>
+            Determines the scew angle and if confidence is high enough returns the descewed image as the result, otherwise returns clone of original image.
+            </summary>
+            <remarks>
+            This binarizes if necessary and finds the skew angle.  If the
+            angle is large enough and there is sufficient confidence,
+            it returns a deskewed image; otherwise, it returns a clone.
+            </remarks>
+            <returns>Returns deskewed image if confidence was high enough, otherwise returns clone of original pix.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.Deskew(Tesseract.Scew@)">
+            <summary>
+            Determines the scew angle and if confidence is high enough returns the descewed image as the result, otherwise returns clone of original image.
+            </summary>
+            <remarks>
+            This binarizes if necessary and finds the skew angle.  If the
+            angle is large enough and there is sufficient confidence,
+            it returns a deskewed image; otherwise, it returns a clone.
+            </remarks>
+            <param name="scew">The scew angle and confidence</param>
+            <returns>Returns deskewed image if confidence was high enough, otherwise returns clone of original pix.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.Deskew(System.Int32,Tesseract.Scew@)">
+            <summary>
+            Determines the scew angle and if confidence is high enough returns the descewed image as the result, otherwise returns clone of original image.
+            </summary>
+            <remarks>
+            This binarizes if necessary and finds the skew angle.  If the
+            angle is large enough and there is sufficient confidence,
+            it returns a deskewed image; otherwise, it returns a clone.
+            </remarks>
+            <param name="redSearch">The reduction factor used by the binary search, can be 1, 2, or 4.</param>
+            <param name="scew">The scew angle and confidence</param>
+            <returns>Returns deskewed image if confidence was high enough, otherwise returns clone of original pix.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.Deskew(Tesseract.ScewSweep,System.Int32,System.Int32,Tesseract.Scew@)">
+            <summary>
+            Determines the scew angle and if confidence is high enough returns the descewed image as the result, otherwise returns clone of original image.
+            </summary>
+            <remarks>
+            This binarizes if necessary and finds the skew angle.  If the
+            angle is large enough and there is sufficient confidence,
+            it returns a deskewed image; otherwise, it returns a clone.
+            </remarks>
+            <param name="sweep">linear sweep parameters</param>
+            <param name="redSearch">The reduction factor used by the binary search, can be 1, 2, or 4.</param>
+            <param name="thresh">The threshold value used for binarizing the image.</param>
+            <param name="scew">The scew angle and confidence</param>
+            <returns>Returns deskewed image if confidence was high enough, otherwise returns clone of original pix.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.Rotate(System.Single,Tesseract.RotationMethod,Tesseract.RotationFill,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Creates a new image by rotating this image about it's centre.
+            </summary>
+            <remarks>
+            Please note the following:
+            <list type="bullet">
+            <item>
+            Rotation will bring in either white or black pixels, as specified by <paramref name="fillColor" /> from
+            the outside as required.
+            </item>
+            <item>Above 20 degrees, sampling rotation will be used if shear was requested.</item>
+            <item>Colormaps are removed for rotation by area map and shear.</item>
+            <item>
+            The resulting image can be expanded so that no image pixels are lost. To invoke expansion,
+            input the original width and height. For repeated rotation, use of the original width and heigh allows
+            expansion to stop at the maximum required size which is a square of side = sqrt(w*w + h*h).
+            </item>
+            </list>
+            <para>
+            Please note there is an implicit assumption about RGB component ordering.
+            </para>
+            </remarks>
+            <param name="angleInRadians">The angle to rotate by, in radians; clockwise is positive.</param>
+            <param name="method">The rotation method to use.</param>
+            <param name="fillColor">The fill color to use for pixels that are brought in from the outside.</param>
+            <param name="width">The original width; use 0 to avoid embedding</param>
+            <param name="height">The original height; use 0 to avoid embedding</param>
+            <returns>The image rotated around it's centre.</returns>
+        </member>
+        <member name="M:Tesseract.Pix.Rotate90(System.Int32)">
+            <summary>
+            90 degree rotation.
+            </summary>
+            <param name="direction">1 = clockwise,  -1 = counter-clockwise</param>
+            <returns>rotated image</returns>
+        </member>
+        <member name="M:Tesseract.Pix.Scale(System.Single,System.Single)">
+             <summary>
+             Scales the current pix by the specified <paramref name="scaleX"/> and <paramref name="scaleY"/> factors returning a new <see cref="T:Tesseract.Pix"/> of the same depth. 
+             </summary>
+             <param name="scaleX"></param>
+             <param name="scaleY"></param>
+             <returns>The scaled image.</returns>
+             <remarks>
+             <para>
+              This function scales 32 bpp RGB; 2, 4 or 8 bpp palette color;
+             2, 4, 8 or 16 bpp gray; and binary images.
+             </para>
+             <para>
+             When the input has palette color, the colormap is removed and
+             the result is either 8 bpp gray or 32 bpp RGB, depending on whether
+             the colormap has color entries.  Images with 2, 4 or 16 bpp are
+             converted to 8 bpp.
+             </para>
+             <para>
+             Because Scale() is meant to be a very simple interface to a
+             number of scaling functions, including the use of unsharp masking,
+             the type of scaling and the sharpening parameters are chosen
+             by default.  Grayscale and color images are scaled using one
+             of four methods, depending on the scale factors:
+             <list type="number">
+             <item>
+             <description>
+             antialiased subsampling (lowpass filtering followed by
+             subsampling, implemented here by area mapping), for scale factors
+             less than 0.2
+             </description>
+             </item>
+             <item>
+             <description>
+             antialiased subsampling with sharpening, for scale factors
+             between 0.2 and 0.7.
+             </description>
+             </item>
+             <item>
+             <description>
+             linear interpolation with sharpening, for scale factors between
+             0.7 and 1.4.
+             </description>
+             </item>
+             <item>
+             <description>
+             linear interpolation without sharpening, for scale factors >= 1.4.
+             </description>
+             </item>
+             </list>
+             One could use subsampling for scale factors very close to 1.0,
+             because it preserves sharp edges.  Linear interpolation blurs
+             edges because the dest pixels will typically straddle two src edge
+             pixels.  Subsmpling removes entire columns and rows, so the edge is
+             not blurred.  However, there are two reasons for not doing this.
+             First, it moves edges, so that a straight line at a large angle to
+             both horizontal and vertical will have noticable kinks where
+             horizontal and vertical rasters are removed.  Second, although it
+             is very fast, you get good results on sharp edges by applying
+             a sharpening filter.
+             </para>
+             <para>
+             For images with sharp edges, sharpening substantially improves the
+             image quality for scale factors between about 0.2 and about 2.0.
+             pixScale() uses a small amount of sharpening by default because
+             it strengthens edge pixels that are weak due to anti-aliasing.
+             The default sharpening factors are:
+             <list type="bullet">
+             <item>
+             <description><![CDATA[for scaling factors < 0.7:   sharpfract = 0.2    sharpwidth = 1]]></description>
+             </item>
+             <item>
+             <description>for scaling factors >= 0.7:  sharpfract = 0.4    sharpwidth = 2</description>
+             </item>
+             </list>
+             The cases where the sharpening halfwidth is 1 or 2 have special
+             implementations and are about twice as fast as the general case.
+             </para>
+             <para>
+             However, sharpening is computationally expensive, and one needs
+             to consider the speed-quality tradeoff:
+             <list type="bullet">
+             <item>
+             <description>
+             For upscaling of RGB images, linear interpolation plus default
+             sharpening is about 5 times slower than upscaling alone.</description>
+             </item>
+             <item>
+             <description>
+             For downscaling, area mapping plus default sharpening is
+             about 10 times slower than downscaling alone.
+             </description>
+             </item>
+             </list>
+             When the scale factor is larger than 1.4, the cost of sharpening,
+             which is proportional to image area, is very large compared to the
+             incremental quality improvement, so we cut off the default use of
+             sharpening at 1.4.  Thus, for scale factors greater than 1.4,
+             pixScale() only does linear interpolation.
+             </para>
+             <para>
+             In many situations you will get a satisfactory result by scaling
+             without sharpening: call pixScaleGeneral() with @sharpfract = 0.0.
+             Alternatively, if you wish to sharpen but not use the default
+             value, first call pixScaleGeneral() with @sharpfract = 0.0, and
+             then sharpen explicitly using pixUnsharpMasking().
+             </para>
+             <para>
+             Binary images are scaled to binary by sampling the closest pixel,
+             without any low-pass filtering (averaging of neighboring pixels).
+             This will introduce aliasing for reductions.  Aliasing can be
+             prevented by using pixScaleToGray() instead.
+             </para>
+             <para>
+             Warning: implicit assumption about RGB component order for LI color scaling
+             </para>
+            </remarks>
+        </member>
+        <member name="T:Tesseract.PixArray">
+            <summary>
+            Represents an array of <see cref="T:Tesseract.Pix"/>.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixArray.LoadMultiPageTiffFromFile(System.String)">
+            <summary>
+            Loads the multi-page tiff located at <paramref name="filename"/>.
+            </summary>
+            <param name="filename"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tesseract.PixArray.PixArrayEnumerator">
+            <summary>
+            Handles enumerating through the <see cref="T:Tesseract.Pix"/> in the PixArray.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixArray.PixArrayEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="P:Tesseract.PixArray.PixArrayEnumerator.Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:Tesseract.PixArray.PixArrayEnumerator.System#Collections#IEnumerator#Reset">
+            <inheritdoc/>
+        </member>
+        <member name="P:Tesseract.PixArray.PixArrayEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:Tesseract.PixArray.PixArrayEnumerator.VerifyArrayUnchanged">
+            <inheritdoc/>
+        </member>
+        <member name="F:Tesseract.PixArray._handle">
+            <summary>
+            Gets the handle to the underlying PixA structure.
+            </summary>
+        </member>
+        <member name="P:Tesseract.PixArray.Count">
+            <summary>
+            Gets the number of <see cref="T:Tesseract.Pix"/> contained in the array.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixArray.Add(Tesseract.Pix,Tesseract.PixArrayAccessType)">
+            <summary>
+            Add the specified pix to the end of the pix array.
+            </summary>
+            <remarks>
+            PixArrayAccessType.Insert is not supported as the managed Pix object will attempt to release the pix when
+            it goes out of scope creating an access exception.
+            </remarks>
+            <param name="pix">The pix to add.</param>
+            <param name="copyflag">Determines if a clone or copy of the pix is inserted into the array.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.PixArray.Remove(System.Int32)">
+            <summary>
+            Removes the pix located at index.
+            </summary>
+            <remarks>
+            Notes:
+            * This shifts pixa[i] --> pixa[i - 1] for all i > index.
+            * Do not use on large arrays as the functionality is O(n).
+            * The corresponding box is removed as well, if it exists.
+            </remarks>
+            <param name="index">The index of the pix to remove.</param>
+        </member>
+        <member name="M:Tesseract.PixArray.Clear">
+            <summary>
+            Destroys ever pix in the array.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixArray.GetPix(System.Int32,Tesseract.PixArrayAccessType)">
+            <summary>
+            Gets the <see cref="T:Tesseract.Pix"/> located at <paramref name="index"/> using the specified <paramref name="accessType"/>.
+            </summary>
+            <param name="index">The index of the pix (zero based).</param>
+            <param name="accessType">The <see cref="T:Tesseract.PixArrayAccessType" /> used to retrieve the <see cref="T:Tesseract.Pix"/>, only Clone or Copy are allowed.</param>
+            <returns>The retrieved <see cref="T:Tesseract.Pix"/>.</returns>
+        </member>
+        <member name="M:Tesseract.PixArray.GetEnumerator">
+            <summary>
+            Returns a <see cref="T:System.Collections.Generic.IEnumerator`1"/> that iterates the the array of <see cref="T:Tesseract.Pix"/>.
+            </summary>
+            <remarks>
+            When done with the enumerator you must call <see cref="M:Tesseract.PixArray.Dispose(System.Boolean)"/> to release any unmanaged resources.
+            However if your using the enumerator in a foreach loop, this is done for you automatically by .Net. This also means
+            that any <see cref="T:Tesseract.Pix"/> returned from the enumerator cannot safely be used outside a foreach loop (or after Dispose has been
+            called on the enumerator). If you do indeed need the pix after the enumerator has been disposed of you must clone it using 
+            <see cref="M:Tesseract.Pix.Clone"/>. 
+            </remarks>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that iterates the the array of <see cref="T:Tesseract.Pix"/>.</returns>
+        </member>
+        <member name="T:Tesseract.PixArrayAccessType">
+            <summary>
+            Determines how <see cref="T:Tesseract.Pix"/> of a <see cref="T:Tesseract.PixArray"/> structure are accessed.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PixArrayAccessType.Insert">
+            <summary>
+            Stuff it in; no copy, clone or copy-clone.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PixArrayAccessType.Copy">
+            <summary>
+            Make/use a copy of the object.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PixArrayAccessType.Clone">
+            <summary>
+            Make/use clone (ref count) of the object   
+            </summary>
+        </member>
+        <member name="F:Tesseract.PixArrayAccessType.CopyClone">
+            <summary>
+            Make a new object and fill with with clones of each object in the array(s) 
+            </summary>
+        </member>
+        <member name="T:Tesseract.PixColormap">
+            <summary>
+            Represents a colormap.
+            </summary>
+            <remarks>
+            Once the colormap is assigned to a pix it is owned by that pix and will be disposed off automatically 
+            when the pix is disposed off.
+            </remarks>
+        </member>
+        <member name="P:Tesseract.PixData.Data">
+            <summary>
+            Pointer to the data.
+            </summary>
+        </member>
+        <member name="P:Tesseract.PixData.WordsPerLine">
+            <summary>
+            Number of 32-bit words per line. 
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.EndianByteSwap">
+            <summary>
+            Swaps the bytes on little-endian platforms within a word; bytes 0 and 3 swapped, and bytes `1 and 2 are swapped.
+            </summary>
+            <remarks>
+            This is required for little-endians in situations where we convert from a serialized byte order that is in raster order, 
+            as one typically has in file formats, to one with MSB-to-the-left in each 32-bit word, or v.v. See <seealso href="http://www.leptonica.com/byte-addressing.html"/>
+            </remarks>
+        </member>
+        <member name="M:Tesseract.PixData.GetDataBit(System.UInt32*,System.Int32)">
+            <summary>
+            Gets the pixel value for a 1bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.SetDataBit(System.UInt32*,System.Int32,System.UInt32)">
+            <summary>
+            Sets the pixel value for a 1bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.GetDataDIBit(System.UInt32*,System.Int32)">
+            <summary>
+            Gets the pixel value for a 2bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.SetDataDIBit(System.UInt32*,System.Int32,System.UInt32)">
+            <summary>
+            Sets the pixel value for a 2bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.GetDataQBit(System.UInt32*,System.Int32)">
+            <summary>
+            Gets the pixel value for a 4bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.SetDataQBit(System.UInt32*,System.Int32,System.UInt32)">
+            <summary>
+            Sets the pixel value for a 4bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.GetDataByte(System.UInt32*,System.Int32)">
+            <summary>
+            Gets the pixel value for a 8bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.SetDataByte(System.UInt32*,System.Int32,System.UInt32)">
+            <summary>
+            Sets the pixel value for a 8bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.GetDataTwoByte(System.UInt32*,System.Int32)">
+            <summary>
+            Gets the pixel value for a 16bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.SetDataTwoByte(System.UInt32*,System.Int32,System.UInt32)">
+            <summary>
+            Sets the pixel value for a 16bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.GetDataFourByte(System.UInt32*,System.Int32)">
+            <summary>
+            Gets the pixel value for a 32bpp image.
+            </summary>
+        </member>
+        <member name="M:Tesseract.PixData.SetDataFourByte(System.UInt32*,System.Int32,System.UInt32)">
+            <summary>
+            Sets the pixel value for a 32bpp image.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.Unknown">
+            <summary>
+            The type is not known yet, keep as first element.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.FlowingText">
+            <summary>
+            The text is inside a column.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.HeadingText">
+            <summary>
+            The text spans more than one column.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.PullOutText">
+            <summary>
+            The text is in a cross-column pull-out region.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.Equation">
+            <summary>
+            The partion belongs to an equation region..
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.InlineEquation">
+            <summary>
+            The partion has an inline equation.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.Table">
+            <summary>
+            The partion belongs to a Table region.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.VerticalText">
+            <summary>
+            Text line runs vertically.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.CaptionText">
+            <summary>
+            Text that belongs to an image.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.FlowingImage">
+            <summary>
+            Image that lives inside a column.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.HeadingImage">
+            <summary>
+            Image that spans more than one column.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.PullOutImage">
+            <summary>
+            Image that is in a cross-column pull-out region.
+            </summary>
+        </member>
+        <member name="F:Tesseract.PolyBlockType.Noise">
+            <summary>
+            Lies outside any column.
+            </summary>
+        </member>
+        <member name="M:Tesseract.ResultIterator.GetChoiceIterator">
+            <summary>
+            Gets an instance of a choice iterator using the current symbol of interest. The ChoiceIterator allows a one-shot iteration over the
+            choices for this symbol and after that is is useless.
+            </summary>
+            <returns>an instance of a Choice Iterator</returns>
+        </member>
+        <member name="T:Tesseract.RenderedFormat">
+            <summary>
+            Rendered formats supported by Tesseract.
+            </summary>
+        </member>
+        <member name="T:Tesseract.ResultRenderer">
+            <summary>
+            Represents a native result renderer (e.g. text, pdf, etc).
+            </summary>
+            <remarks>
+            Note that the ResultRenderer is explictly responsible for managing the
+            renderer hierarchy. This gets around a number of difficult issues such
+            as keeping track of what the next renderer is and how to manage the memory.
+            </remarks>
+        </member>
+        <member name="M:Tesseract.ResultRenderer.CreateRenderers(System.String,System.String,System.Collections.Generic.List{Tesseract.RenderedFormat})">
+            <summary>
+            Creates renderers for specified output formats.
+            </summary>
+            <param name="outputbase"></param>
+            <param name="dataPath">The directory containing the pdf font data, normally same as your tessdata directory.</param>
+            <param name="outputFormats"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.ResultRenderer.CreatePdfRenderer(System.String,System.String,System.Boolean)">
+            <summary>
+            Creates a <see cref="T:Tesseract.IResultRenderer">result renderer</see> that render that generates a searchable
+            pdf file from tesseract's output.
+            </summary>
+            <param name="outputFilename">The filename of the pdf file to be generated without the file extension.</param>
+            <param name="fontDirectory">The directory containing the pdf font data, normally same as your tessdata directory.</param>
+            <param name="textonly">skip images if set</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.ResultRenderer.CreateTextRenderer(System.String)">
+            <summary>
+            Creates a <see cref="T:Tesseract.IResultRenderer">result renderer</see> that render that generates UTF-8 encoded text
+            file from tesseract's output.
+            </summary>
+            <param name="outputFilename">The path to the text file to be generated without the file extension.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.ResultRenderer.CreateHOcrRenderer(System.String,System.Boolean)">
+            <summary>
+            Creates a <see cref="T:Tesseract.IResultRenderer">result renderer</see> that render that generates a HOCR
+            file from tesseract's output.
+            </summary>
+            <param name="outputFilename">The path to the hocr file to be generated without the file extension.</param>
+            <param name="fontInfo">Determines if the generated HOCR file includes font information or not.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.ResultRenderer.CreateUnlvRenderer(System.String)">
+            <summary>
+            Creates a <see cref="T:Tesseract.IResultRenderer">result renderer</see> that render that generates a unlv
+            file from tesseract's output.
+            </summary>
+            <param name="outputFilename">The path to the unlv file to be created without the file extension.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tesseract.ResultRenderer.CreateBoxRenderer(System.String)">
+            <summary>
+            Creates a <see cref="T:Tesseract.IResultRenderer">result renderer</see> that render that generates a box text file from tesseract's output.
+            </summary>
+            <param name="outputFilename">The path to the box file to be created without the file extension.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Tesseract.ResultRenderer.EndDocumentOnDispose">
+            <summary>
+            Ensures the renderer's EndDocument when disposed off.
+            </summary>
+        </member>
+        <member name="M:Tesseract.ResultRenderer.Initialise(System.IntPtr)">
+            <summary>
+            Initialise the render to use the specified native result renderer.
+            </summary>
+            <param name="handle"></param>
+        </member>
+        <member name="M:Tesseract.ResultRenderer.AddPage(Tesseract.Page)">
+            <summary>
+            Add the page to the current document.
+            </summary>
+            <param name="page"></param>
+            <returns><c>True</c> if the page was successfully added to the result renderer; otherwise false.</returns>
+        </member>
+        <member name="M:Tesseract.ResultRenderer.BeginDocument(System.String)">
+            <summary>
+            Begins a new document with the specified <paramref name="title"/>.
+            </summary>
+            <param name="title">The (ANSI) title of the new document.</param>
+            <returns>A handle that when disposed of ends the current document.</returns>
+        </member>
+        <member name="T:Tesseract.RotationFill">
+            <summary>
+            What colour pixels should be used for the outside?
+            </summary>
+        </member>
+        <member name="F:Tesseract.RotationFill.White">
+            <summary>
+            Bring in white pixels from the outside.
+            </summary>
+        </member>
+        <member name="F:Tesseract.RotationFill.Black">
+            <summary>
+            Bring in black pixels from the outside.
+            </summary>
+        </member>
+        <member name="T:Tesseract.RotationMethod">
+            <summary>
+            Represents the method used to rotate an image.
+            </summary>
+        </member>
+        <member name="F:Tesseract.RotationMethod.AreaMap">
+            <summary>
+            Use area map rotation, if possible.
+            </summary>
+        </member>
+        <member name="F:Tesseract.RotationMethod.Shear">
+            <summary>
+            Use shear rotation.
+            </summary>
+        </member>
+        <member name="F:Tesseract.RotationMethod.Sampling">
+            <summary>
+            Use sampling.
+            </summary>
+        </member>
+        <member name="T:Tesseract.ScewSweep">
+            <summary>
+            Represents the parameters for a sweep search used by scew algorithms.
+            </summary>
+        </member>
+        <member name="T:Tesseract.TesseractEngine">
+            <summary>
+            The tesseract OCR engine.
+            </summary>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:Tesseract.TesseractEngine"/> using the <see cref="F:Tesseract.EngineMode.Default"/> mode.
+            </summary>
+            <remarks>
+            <para>
+            The <paramref name="datapath"/> parameter should point to the directory that contains the 'tessdata' folder
+            for example if your tesseract language data is installed in <c>C:\Tesseract\tessdata</c> the value of datapath should
+            be <c>C:\Tesseract</c>. Note that tesseract will use the value of the <c>TESSDATA_PREFIX</c> environment variable if defined,
+            effectively ignoring the value of <paramref name="datapath"/> parameter.
+            </para>
+            </remarks>
+            <param name="datapath">The path to the parent directory that contains the 'tessdata' directory, ignored if the <c>TESSDATA_PREFIX</c> environment variable is defined.</param>
+            <param name="language">The language to load, for example 'eng' for English.</param>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:Tesseract.TesseractEngine"/> with the specified <paramref name="configFile"/>
+            using the <see cref="F:Tesseract.EngineMode.Default">Default Engine Mode</see>.
+            </summary>
+            <remarks>
+            <para>
+            The <paramref name="datapath"/> parameter should point to the directory that contains the 'tessdata' folder
+            for example if your tesseract language data is installed in <c>C:\Tesseract\tessdata</c> the value of datapath should
+            be <c>C:\Tesseract</c>. Note that tesseract will use the value of the <c>TESSDATA_PREFIX</c> environment variable if defined,
+            effectively ignoring the value of <paramref name="datapath"/> parameter.
+            </para>
+            <para>
+            Note: That the config files MUST be encoded without the BOM using unix end of line characters.
+            </para>
+            </remarks>
+            <param name="datapath">The path to the parent directory that contains the 'tessdata' directory, ignored if the <c>TESSDATA_PREFIX</c> environment variable is defined.</param>
+            <param name="language">The language to load, for example 'eng' for English.</param>
+            <param name="configFile">
+            An optional tesseract configuration file that is encoded using UTF8 without BOM
+            with Unix end of line characters you can use an advanced text editor such as Notepad++ to accomplish this.
+            </param>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new instance of <see cref="T:Tesseract.TesseractEngine"/> with the specified <paramref name="configFiles"/>
+            using the <see cref="F:Tesseract.EngineMode.Default">Default Engine Mode</see>.
+            </summary>
+            <remarks>
+            <para>
+            The <paramref name="datapath"/> parameter should point to the directory that contains the 'tessdata' folder
+            for example if your tesseract language data is installed in <c>C:\Tesseract\tessdata</c> the value of datapath should
+            be <c>C:\Tesseract</c>. Note that tesseract will use the value of the <c>TESSDATA_PREFIX</c> environment variable if defined,
+            effectively ignoring the value of <paramref name="datapath"/> parameter.
+            </para>
+            </remarks>
+            <param name="datapath">The path to the parent directory that contains the 'tessdata' directory, ignored if the <c>TESSDATA_PREFIX</c> environment variable is defined.</param>
+            <param name="language">The language to load, for example 'eng' for English.</param>
+            <param name="configFiles">
+            An optional sequence of tesseract configuration files to load, encoded using UTF8 without BOM
+            with Unix end of line characters you can use an advanced text editor such as Notepad++ to accomplish this.
+            </param>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.#ctor(System.String,System.String,Tesseract.EngineMode)">
+            <summary>
+            Creates a new instance of <see cref="T:Tesseract.TesseractEngine"/> with the specified <paramref name="engineMode"/>.
+            </summary>
+            <remarks>
+            <para>
+            The <paramref name="datapath"/> parameter should point to the directory that contains the 'tessdata' folder
+            for example if your tesseract language data is installed in <c>C:\Tesseract\tessdata</c> the value of datapath should
+            be <c>C:\Tesseract</c>. Note that tesseract will use the value of the <c>TESSDATA_PREFIX</c> environment variable if defined,
+            effectively ignoring the value of <paramref name="datapath"/> parameter.
+            </para>
+            </remarks>
+            <param name="datapath">The path to the parent directory that contains the 'tessdata' directory, ignored if the <c>TESSDATA_PREFIX</c> environment variable is defined.</param>
+            <param name="language">The language to load, for example 'eng' for English.</param>
+            <param name="engineMode">The <see cref="T:Tesseract.EngineMode"/> value to use when initialising the tesseract engine.</param>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.#ctor(System.String,System.String,Tesseract.EngineMode,System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:Tesseract.TesseractEngine"/> with the specified <paramref name="engineMode"/> and <paramref name="configFile"/>.
+            </summary>
+            <remarks>
+            <para>
+            The <paramref name="datapath"/> parameter should point to the directory that contains the 'tessdata' folder
+            for example if your tesseract language data is installed in <c>C:\Tesseract\tessdata</c> the value of datapath should
+            be <c>C:\Tesseract</c>. Note that tesseract will use the value of the <c>TESSDATA_PREFIX</c> environment variable if defined,
+            effectively ignoring the value of <paramref name="datapath"/> parameter.
+            </para>
+            <para>
+            Note: That the config files MUST be encoded without the BOM using unix end of line characters.
+            </para>
+            </remarks>
+            <param name="datapath">The path to the parent directory that contains the 'tessdata' directory, ignored if the <c>TESSDATA_PREFIX</c> environment variable is defined.</param>
+            <param name="language">The language to load, for example 'eng' for English.</param>
+            <param name="engineMode">The <see cref="T:Tesseract.EngineMode"/> value to use when initialising the tesseract engine.</param>
+            <param name="configFile">
+            An optional tesseract configuration file that is encoded using UTF8 without BOM
+            with Unix end of line characters you can use an advanced text editor such as Notepad++ to accomplish this.
+            </param>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.#ctor(System.String,System.String,Tesseract.EngineMode,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new instance of <see cref="T:Tesseract.TesseractEngine"/> with the specified <paramref name="engineMode"/> and <paramref name="configFiles"/>.
+            </summary>
+            <remarks>
+            <para>
+            The <paramref name="datapath"/> parameter should point to the directory that contains the 'tessdata' folder
+            for example if your tesseract language data is installed in <c>C:\Tesseract\tessdata</c> the value of datapath should
+            be <c>C:\Tesseract</c>. Note that tesseract will use the value of the <c>TESSDATA_PREFIX</c> environment variable if defined,
+            effectively ignoring the value of <paramref name="datapath"/> parameter.
+            </para>
+            </remarks>
+            <param name="datapath">The path to the parent directory that contains the 'tessdata' directory, ignored if the <c>TESSDATA_PREFIX</c> environment variable is defined.</param>
+            <param name="language">The language to load, for example 'eng' for English.</param>
+            <param name="engineMode">The <see cref="T:Tesseract.EngineMode"/> value to use when initialising the tesseract engine.</param>
+            <param name="configFiles">
+            An optional sequence of tesseract configuration files to load, encoded using UTF8 without BOM
+            with Unix end of line characters you can use an advanced text editor such as Notepad++ to accomplish this.
+            </param>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.#ctor(System.String,System.String,Tesseract.EngineMode,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IDictionary{System.String,System.Object},System.Boolean)">
+            <summary>
+            Creates a new instance of <see cref="T:Tesseract.TesseractEngine"/> with the specified <paramref name="engineMode"/> and <paramref name="configFiles"/>.
+            </summary>
+            <remarks>
+            <para>
+            The <paramref name="datapath"/> parameter should point to the directory that contains the 'tessdata' folder
+            for example if your tesseract language data is installed in <c>C:\Tesseract\tessdata</c> the value of datapath should
+            be <c>C:\Tesseract</c>. Note that tesseract will use the value of the <c>TESSDATA_PREFIX</c> environment variable if defined,
+            effectively ignoring the value of <paramref name="datapath"/> parameter.
+            </para>
+            </remarks>
+            <param name="datapath">The path to the parent directory that contains the 'tessdata' directory, ignored if the <c>TESSDATA_PREFIX</c> environment variable is defined.</param>
+            <param name="language">The language to load, for example 'eng' for English.</param>
+            <param name="engineMode">The <see cref="T:Tesseract.EngineMode"/> value to use when initialising the tesseract engine.</param>
+            <param name="configFiles">
+            An optional sequence of tesseract configuration files to load, encoded using UTF8 without BOM
+            with Unix end of line characters you can use an advanced text editor such as Notepad++ to accomplish this.
+            </param>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.Process(Tesseract.Pix,System.Nullable{Tesseract.PageSegMode})">
+            <summary>
+            Processes the specific image.
+            </summary>
+            <remarks>
+            You can only have one result iterator open at any one time.
+            </remarks>
+            <param name="image">The image to process.</param>
+            <param name="pageSegMode">The page layout analyasis method to use.</param>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.Process(Tesseract.Pix,Tesseract.Rect,System.Nullable{Tesseract.PageSegMode})">
+            <summary>
+            Processes a specified region in the image using the specified page layout analysis mode.
+            </summary>
+            <remarks>
+            You can only have one result iterator open at any one time.
+            </remarks>
+            <param name="image">The image to process.</param>
+            <param name="region">The image region to process.</param>
+            <param name="pageSegMode">The page layout analyasis method to use.</param>
+            <returns>A result iterator</returns>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.Process(Tesseract.Pix,System.String,System.Nullable{Tesseract.PageSegMode})">
+            <summary>
+            Processes the specific image.
+            </summary>
+            <remarks>
+            You can only have one result iterator open at any one time.
+            </remarks>
+            <param name="image">The image to process.</param>
+            <param name="inputName">Sets the input file's name, only needed for training or loading a uzn file.</param>
+            <param name="pageSegMode">The page layout analyasis method to use.</param>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.Process(Tesseract.Pix,System.String,Tesseract.Rect,System.Nullable{Tesseract.PageSegMode})">
+            <summary>
+            Processes a specified region in the image using the specified page layout analysis mode.
+            </summary>
+            <remarks>
+            You can only have one result iterator open at any one time.
+            </remarks>
+            <param name="image">The image to process.</param>
+            <param name="inputName">Sets the input file's name, only needed for training or loading a uzn file.</param>
+            <param name="region">The image region to process.</param>
+            <param name="pageSegMode">The page layout analyasis method to use.</param>
+            <returns>A result iterator</returns>
+        </member>
+        <member name="T:Tesseract.TesseractEngine.PageDisposalHandle">
+            <summary>
+            Ties the specified pix to the lifecycle of a page.
+            </summary>
+        </member>
+        <member name="P:Tesseract.TesseractEngine.DefaultPageSegMode">
+            <summary>
+            Gets or sets default <see cref="T:Tesseract.PageSegMode" /> mode used by <see cref="M:Tesseract.TesseractEngine.Process(Tesseract.Pix,Tesseract.Rect,System.Nullable{Tesseract.PageSegMode})" />.
+            </summary>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.SetVariable(System.String,System.String)">
+            <summary>
+            Sets the value of a string variable.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="value">The new value of the variable.</param>
+            <returns>Returns <c>True</c> if successful; otherwise <c>False</c>.</returns>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.SetVariable(System.String,System.Boolean)">
+            <summary>
+            Sets the value of a boolean variable.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="value">The new value of the variable.</param>
+            <returns>Returns <c>True</c> if successful; otherwise <c>False</c>.</returns>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.SetVariable(System.String,System.Int32)">
+            <summary>
+            Sets the value of a integer variable.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="value">The new value of the variable.</param>
+            <returns>Returns <c>True</c> if successful; otherwise <c>False</c>.</returns>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.SetVariable(System.String,System.Double)">
+            <summary>
+            Sets the value of a double variable.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="value">The new value of the variable.</param>
+            <returns>Returns <c>True</c> if successful; otherwise <c>False</c>.</returns>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.TryGetBoolVariable(System.String,System.Boolean@)">
+            <summary>
+            Attempts to retrieve the value for a boolean variable.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="value">The current value of the variable.</param>
+            <returns>Returns <c>True</c> if successful; otherwise <c>False</c>.</returns>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.TryGetDoubleVariable(System.String,System.Double@)">
+            <summary>
+            Attempts to retrieve the value for a double variable.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="value">The current value of the variable.</param>
+            <returns>Returns <c>True</c> if successful; otherwise <c>False</c>.</returns>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.TryGetIntVariable(System.String,System.Int32@)">
+            <summary>
+            Attempts to retrieve the value for an integer variable.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="value">The current value of the variable.</param>
+            <returns>Returns <c>True</c> if successful; otherwise <c>False</c>.</returns>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.TryGetStringVariable(System.String,System.String@)">
+            <summary>
+            Attempts to retrieve the value for a string variable.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="value">The current value of the variable.</param>
+            <returns>Returns <c>True</c> if successful; otherwise <c>False</c>.</returns>
+        </member>
+        <member name="M:Tesseract.TesseractEngine.TryPrintVariablesToFile(System.String)">
+            <summary>
+            Attempts to print the variables to the file.
+            </summary>
+            <param name="filename"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Tesseract.TesseractEnviornment.CustomSearchPath">
+            <summary>
+            Gets or sets a search path that will be checked first when attempting to load the Tesseract and Leptonica dlls.
+            </summary>
+            <remarks>
+            This search path should not include the platform component as this will automatically be appended to the string based on the detected platform.
+            </remarks>
+        </member>
+        <member name="T:Tesseract.TesseractException">
+            <summary>
+            Desctiption of TesseractException.
+            </summary>
+        </member>
+        <member name="T:Tesseract.TextLineOrder">
+            <summary>
+            The text lines are read in the given sequence.
+            </summary>
+            <remarks>
+            <para>
+            For example in English the order is top-to-bottom. Chinese vertical text lines
+            are read right-to-left. While Mongolian is written in vertical columns
+            like Chinese but read left-to-right.
+            </para>
+            <para>
+            Note that only some combinations makes sense for example <see cref="F:Tesseract.WritingDirection.LeftToRight"/> implies
+            <see cref="F:Tesseract.TextLineOrder.TopToBottom" />.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Tesseract.TextLineOrder.LeftToRight">
+            <summary>
+            The text lines form vertical columns ordered left to right.
+            </summary>
+        </member>
+        <member name="F:Tesseract.TextLineOrder.RightToLeft">
+            <summary>
+            The text lines form vertical columns ordered right to left.
+            </summary>
+        </member>
+        <member name="F:Tesseract.TextLineOrder.TopToBottom">
+            <summary>
+            The text lines form horizontal columns ordered top to bottom.
+            </summary>
+        </member>
+        <member name="T:Tesseract.WritingDirection">
+            <summary>
+            The grapheme cluster within a line of text are laid out logically in this direction,
+            judged when looking at the text line rotated so that Orientation is "page up".
+            </summary>
+        </member>
+        <member name="F:Tesseract.WritingDirection.LeftToRight">
+            <summary>
+            The text line from the left hand side to the right hand side when the page is rotated so it's orientation is <see cref="F:Tesseract.Orientation.PageUp" />.
+            </summary>
+        </member>
+        <member name="F:Tesseract.WritingDirection.RightToLeft">
+            <summary>
+            The text line from the right hand side to the left hand side when the page is rotated so it's orientation is <see cref="F:Tesseract.Orientation.PageUp" />.
+            </summary>
+        </member>
+        <member name="F:Tesseract.WritingDirection.TopToBottom">
+            <summary>
+            The text line from the top to the bottom of the page when the page is rotated so it's orientation is <see cref="F:Tesseract.Orientation.PageUp" />.
+            </summary>
+        </member>
+        <member name="M:InteropDotNet.LibraryLoader.CheckCurrentAppDomainBin(System.String,System.String)">
+            <summary>
+            Special test for web applications.
+            </summary>
+            <remarks>
+            Note that this makes a couple of assumptions these being:
+            
+            <list type="bullet">
+                <item>That the current application domain's location for web applications corresponds to the web applications root directory.</item>
+                <item>That the tesseract\leptonica dlls reside in the corresponding x86 or x64 directories in the bin directory under the apps root directory.</item>
+            </list>
+            </remarks>
+            <param name="fileName"></param>
+            <param name="platformName"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

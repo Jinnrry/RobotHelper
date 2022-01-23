@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastHookRobot", "FastHookRobot.csproj", "{752D0A47-6FC4-482E-90C1-E62BC9418964}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{752D0A47-6FC4-482E-90C1-E62BC9418964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{752D0A47-6FC4-482E-90C1-E62BC9418964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{752D0A47-6FC4-482E-90C1-E62BC9418964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{752D0A47-6FC4-482E-90C1-E62BC9418964}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60A925A2-E5EF-4CED-A201-086BE9D3120F}
+	EndGlobalSection
+EndGlobal

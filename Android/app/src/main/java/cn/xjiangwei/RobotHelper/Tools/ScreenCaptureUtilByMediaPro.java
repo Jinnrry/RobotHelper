@@ -84,7 +84,7 @@ public class ScreenCaptureUtilByMediaPro {
             }
         } while (image == null);
         bitmap = covetBitmap(image);
-        if (bitmapCacheHorizontal != null) {
+        if (bitmapCacheHorizontal != null && !bitmapCacheVertical.isRecycled()) {
             bitmapCacheHorizontal.recycle();
             bitmapCacheHorizontal = null;
         }

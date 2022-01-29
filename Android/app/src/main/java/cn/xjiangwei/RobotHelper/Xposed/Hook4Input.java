@@ -1,5 +1,7 @@
 package cn.xjiangwei.RobotHelper.Xposed;
 
+import android.os.Build;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -13,7 +15,7 @@ public class Hook4Input {
         /**
          * android 10输入参数改了
          */
-        if ("10".equals(android.os.Build.VERSION.RELEASE)) {
+        if (Build.VERSION.SDK_INT >= 29) {
             Hook4Input.hook4android10(lpparam);
         } else {
             Hook4Input.hook4LTandroid10(lpparam);

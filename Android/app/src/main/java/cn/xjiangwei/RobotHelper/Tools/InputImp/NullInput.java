@@ -57,9 +57,10 @@ public class NullInput implements Input {
     }
 
     @Override
-    public void input(String str) {
+    public boolean input(String str) {
         MLog.error("没有权限执行操作！请检查xposed或者无障碍权限！");
         Toast.show("没有权限执行操作！请检查xposed或者无障碍权限！");
+        return false;
     }
 
 

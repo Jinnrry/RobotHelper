@@ -1,0 +1,3 @@
+<input-method xmlns:android="http://schemas.android.com/apk/res/android"
+    android:settingsActivity="cn.xjiangwei.RobotHelper.MainActivity"
+    android:supportsSwitchingToNextInputMethod="true"></input-method>

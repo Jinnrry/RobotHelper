@@ -1054,8 +1054,8 @@ public class RootInput implements Input {
     }
 
     @Override
-    public void input(String str) {
-
+    public boolean input(String str) {
+        return false;
     }
 
 

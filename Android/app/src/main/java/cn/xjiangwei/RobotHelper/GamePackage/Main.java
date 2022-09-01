@@ -3,16 +3,8 @@ package cn.xjiangwei.RobotHelper.GamePackage;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-
-import org.opencv.android.Utils;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-
 import java.io.IOException;
 import java.io.InputStream;
-
 import cn.xjiangwei.RobotHelper.MainApplication;
 import cn.xjiangwei.RobotHelper.Tools.Image;
 import cn.xjiangwei.RobotHelper.Tools.MLog;
@@ -36,6 +28,22 @@ public class Main {
         //Robot.setExecType(Robot.ExecTypeXposed);         //使用xposed权限执行模拟操作，建议优先使用此方式
         //Robot.setExecType(Robot.ExecTypeAccessibillty);  //使用安卓无障碍接口执行模拟操作
         //Robot.setExecType(Robot.ExecTypeROOT)            //使用root权限执行模拟操作（实验阶段，仅在oneplus 7pro测试过，欢迎提bug）
+
+        /****************************  文本输入Demo   ******************************/
+        boolean ret = Robot.input("Hello World!");
+        if (ret){
+            MLog.info("文本输入成功！");
+        }else {
+            MLog.error("文本输入失败！请检查当前焦点是否在文本框，或RobotHelper输入法是否设置为默认输入法！");
+        }
+        sleep(2000);
+        ret = Robot.input("你好呀！");
+        if (ret){
+            MLog.info("文本输入成功！");
+        }else {
+            MLog.error("文本输入失败！请检查当前焦点是否在文本框，或RobotHelper输入法是否设置为默认输入法！");
+        }
+
 
         /****************************  模板匹配demo  *******************************/
         InputStream is = null;

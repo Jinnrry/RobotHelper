@@ -47,9 +47,8 @@ public interface Input {
     /**
      * 往输入框输入文字
      *
-     * @param str
      */
-    void input(String str);
+    boolean input(String str);
 
 
     /**

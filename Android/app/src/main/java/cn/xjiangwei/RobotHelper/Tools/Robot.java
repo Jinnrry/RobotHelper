@@ -4,6 +4,7 @@ package cn.xjiangwei.RobotHelper.Tools;
 import android.os.Build;
 
 import cn.xjiangwei.RobotHelper.MainApplication;
+import cn.xjiangwei.RobotHelper.Service.FastInputIME;
 import cn.xjiangwei.RobotHelper.Tools.InputImp.AccessibilityInput;
 import cn.xjiangwei.RobotHelper.Tools.InputImp.Input;
 import cn.xjiangwei.RobotHelper.Tools.InputImp.InstrumentationInput;
@@ -130,15 +131,18 @@ public class Robot {
      *
      * @param str
      */
-    public static void input(String str) {
-        getInput().input(str);
+    public static boolean input(String str) {
+        // 统一使用输入法实现，暂时不使用单独实现
+//        getInput().input(str);
+
+        return FastInputIME.TextInput(str);
     }
 
 
     /**
      * 放大屏幕（捏开）
      *
-     * @param distance  // 缩放距离，0到100
+     * @param distance // 缩放距离，0到100
      */
     public static void pinchOpen(int distance) {
         getInput().pinchOpen(distance);
@@ -148,7 +152,7 @@ public class Robot {
     /**
      * 缩小屏幕（捏合）
      *
-     * @param distance  // 缩放距离，0到100
+     * @param distance // 缩放距离，0到100
      */
     public static void pinchClose(int distance) {
         getInput().pinchClose(distance);
